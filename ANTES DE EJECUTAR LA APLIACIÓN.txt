@@ -1,0 +1,2 @@
+en el packet manager correr:
+UPDATE-DATABASE
