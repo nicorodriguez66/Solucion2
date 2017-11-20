@@ -20,12 +20,14 @@ namespace Solucion2
         private Teacher searchedTeacher;
         private Van searchedVan;
         private Activity searchedActivity;
+        private Exam searchedExam;
         private Point DefaultPanelLocation;
         public ERP()
         {
             InitializeComponent();
             DefaultPanelLocation.X = ModulesGroupBox.Width + 15;
             DefaultPanelLocation.Y = ModulesGroupBox.Location.Y;
+            this.Size = new Size(500, 500);
             mysystem = new ERPsystem();
             hideallgrouboxes();
         }
@@ -48,6 +50,12 @@ namespace Solucion2
             ActivityCreateGroupBox.Visible = false;
             SubjectListGroupBox.Visible = false;
             TeacherListGroupBox.Visible = false;
+            ExamsGroupBox.Visible = false;
+            ExamDeleteGroupBox.Visible = false;
+            ExamCreateGroupBox.Visible = false;
+            ExamEnrollGroupBox.Visible = false;
+            ExamUnenrollGroupBox.Visible = false;
+            ExamFilterGroupBox.Visible = false;
             btnSubjectSearch.Hide();
             btnSubjectSearchModify.Hide();
             btnSubjectSearchModify1.Hide();
@@ -101,8 +109,24 @@ namespace Solucion2
                 StudentListBoxPayments.Items.Add(element.ToString());
             }
 
+            ExamsToDeleteListBox.Items.Clear();
+            foreach (Exam element in mysystem.showallexams())
+            {
+                ExamsToDeleteListBox.Items.Add(element.ToString());
+            }
 
+            ExamSubjectEnrollListBox.Items.Clear();
+            foreach(Student element in mysystem.showallstudents())
+            {
+                ExamSubjectEnrollListBox.Items.Add(element.ToString());
+            }
 
+            ExamStudentUnEnrollListBox.Items.Clear();
+            foreach(Subject element in mysystem.showallsubjects())
+            {
+                ExamStudentUnEnrollListBox.Items.Add(element.ToString());
+            }
+            
             SubjectTeachersListBox.Items.Clear();
             foreach (Teacher element in mysystem.showallteachers())
             {
@@ -126,16 +150,24 @@ namespace Solucion2
             {
                 VanAvailableListBox1.Items.Add(element.ToString());
             }
-            
+            ExamSubjectListBox.Items.Clear();
+            foreach (Subject element in mysystem.showallsubjects())
+            {
+                ExamSubjectListBox.Items.Add(element.ToString());
+            }
+
             ActivityListBox.Items.Clear();
             foreach(Activity element in mysystem.showallactivities())
             {
                 ActivityListBox.Items.Add(element.ToString());
             }
             comboBox1.Items.Clear();
-            for (int i=1;i<=12;i++)
+            ExamApprovalComboBox.Items.Clear();
+            for (int i = 1; i <= 12; i++)
+            {
                 comboBox1.Items.Add(i.ToString());
-    
+                ExamApprovalComboBox.Items.Add(i.ToString());
+            }
     }
 
         private void BtnStudents_Click(object sender, EventArgs e)
@@ -1069,5 +1101,231 @@ namespace Solucion2
                     PaymentsListBox.Items.Add(element.ToString());
             }
         }
+
+        private void btnExams_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamsGroupBox.Visible = true;
+            ExamsGroupBox.Location = DefaultPanelLocation;
+        }
+
+        private void btnCreateExam1_Click(object sender, EventArgs e)
+        {
+            if((ExamSubjectListBox.SelectedItem!=null) &&(ExamApprovalComboBox.SelectedItem!=null))
+            {
+                string myStringSubject = ExamSubjectListBox.SelectedItem.ToString();
+                string[] subStrings1 = myStringSubject.Split(' ');
+                //searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));
+                searchedSubject = mysystem.searchSubject(Int32.Parse(subStrings1[0]));//substring1[0] 0 = subjectid
+
+                Exam examcreated = new Exam() { approval = Int32.Parse(ExamApprovalComboBox.SelectedItem.ToString()), date = ExamDatePicker.Value, subject = searchedSubject };
+                mysystem.allexams.Add(examcreated);
+            }
+            
+            hideallgrouboxes();
+        }
+
+        private void btnExamCreate_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamCreateGroupBox.Visible = true;
+            ExamCreateGroupBox.Location = DefaultPanelLocation;
+            refreshdata();
+        }
+
+        private void btnExamDelete_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamDeleteGroupBox.Visible = true;
+            ExamDeleteGroupBox.Location = DefaultPanelLocation;
+            ExamDeleteGroupBox.Text = "Baja Examen";
+            refreshdata();
+            btnDeleteSelectedExam.Visible = true;
+        }
+
+        private void btnExamEnroll_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamEnrollGroupBox.Visible = true;
+            ExamEnrollGroupBox.Location = DefaultPanelLocation;
+
+            ExamStudentEnrollListBox.Items.Clear();
+            foreach (Student element in mysystem.showallstudents())
+            {
+                ExamStudentEnrollListBox.Items.Add(element.ToString());
+            }
+            ExamSubjectEnrollListBox.Items.Clear();
+            foreach (Exam element in mysystem.showallexams())
+            {
+                ExamSubjectEnrollListBox.Items.Add(element.ToString());
+            }
+
+
+        }
+
+        private void btnExamUnEnroll_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamUnenrollGroupBox.Visible = true;
+            ExamUnenrollGroupBox.Location = DefaultPanelLocation;
+            ExamStudentUnEnrollListBox.Items.Clear();
+            ExamSubjectUnEnrollListBox.Items.Clear();
+            foreach (Exam element in mysystem.showallexams())
+            {
+                ExamSubjectUnEnrollListBox.Items.Add(element.ToString());
+            }
+        }
+
+        private void ExamSubjectEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //split del subject
+            //cargar listbox de estudiantes del subject
+        }
+
+        private void ExamStudentUnEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+            string myStringStudent = ExamStudentUnEnrollListBox.SelectedItem.ToString();
+            string[] subStrings2 = myStringStudent.Split(' ');
+            searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings2[2]));//substring2[2]= student number
+
+            ExamSubjectUnEnrollListBox.Items.Clear();
+            foreach (Subject subjectfor in searchedStudent.subjects)
+            {
+                foreach(Exam examfor in mysystem.allexams)
+                {
+                    if (examfor.subject.codeId == subjectfor.codeId)
+                        ExamSubjectUnEnrollListBox.Items.Add(examfor);
+                }
+            }
+            */
+            //cargar listbox de examens
+        }
+
+        private void btnExamStudentUnenroll_Click(object sender, EventArgs e)
+        {
+            if((ExamStudentUnEnrollListBox.SelectedItem!=null) &&(ExamSubjectUnEnrollListBox.SelectedItem != null))
+            {
+                string myStringStudent = ExamStudentUnEnrollListBox.SelectedItem.ToString();
+                string[] subStrings2 = myStringStudent.Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings2[2]));//substring2[2]= student number
+
+                string myStringSubject = ExamSubjectUnEnrollListBox.SelectedItem.ToString();
+                string[] subStrings1 = myStringSubject.Split(' ');
+                searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+    
+                searchedExam.ExamUnEnrollStudent(searchedStudent);
+            }
+            hideallgrouboxes();
+            ExamStudentUnEnrollListBox.Items.Clear();
+            ExamSubjectUnEnrollListBox.Items.Clear();
+        }
+
+        private void btnExamStudentEnroll_Click(object sender, EventArgs e)
+        {
+            if ((ExamSubjectEnrollListBox.SelectedItem != null) && (ExamStudentEnrollListBox.SelectedItem != null))
+            {
+                string myStringSubject = ExamSubjectEnrollListBox.SelectedItem.ToString();
+                string[] subStrings1 = myStringSubject.Split(' ');
+                searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+
+                string myStringStudent = ExamStudentEnrollListBox.SelectedItem.ToString();
+                string[] subStrings2 = myStringStudent.Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings2[2]));//substring2[2]= student number
+
+                searchedExam.ExamEnrollStudent(searchedStudent, 0);
+            }
+            hideallgrouboxes();
+            ExamSubjectEnrollListBox.Items.Clear();
+            ExamStudentEnrollListBox.Items.Clear();
+        }
+
+        private void btnDeleteSelectedExam_Click(object sender, EventArgs e)
+        {
+            if (ExamsToDeleteListBox.SelectedItem != null)
+            {
+                string myStringSubject = ExamsToDeleteListBox.SelectedItem.ToString();
+                string[] subStrings1 = myStringSubject.Split(' ');
+                searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+                mysystem.allexams.Remove(searchedExam);
+            }
+            hideallgrouboxes();
+        }
+
+        private void btnExamList_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamDeleteGroupBox.Visible = true;
+            ExamDeleteGroupBox.Location = DefaultPanelLocation;
+            ExamDeleteGroupBox.Text = "Lista de Examenes";
+            refreshdata();
+            btnDeleteSelectedExam.Visible = false;
+        }
+
+        private void ExamStudentEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ExamSubjectUnEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            string myStringSubject = ExamSubjectUnEnrollListBox.SelectedItem.ToString();
+            string[] subStrings1 = myStringSubject.Split(' ');
+            searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+
+            ExamStudentUnEnrollListBox.Items.Clear();
+            foreach(Tuple<Student,int> element in searchedExam.enrolled)
+            {
+                ExamStudentUnEnrollListBox.Items.Add(element.Item1.ToString());
+            }
+        }
+
+        private void btnResults_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamFilterGroupBox.Visible = true;
+            ExamFilterGroupBox.Location = DefaultPanelLocation;
+            ExamFilterListBox.Items.Clear();
+        }
+
+        private void btnExamFilter_Click(object sender, EventArgs e)
+        {
+            List<Exam> origin = mysystem.allexams;
+            List<Exam> L1,L2,L3; L1 = origin; L2 = origin; L3 = origin;
+            ExamFilterListBox.Items.Clear();
+            sortme(origin.OrderBy(p => p.ExamId).ToList());
+
+            if (FilterApprovalCheckBox.Checked)
+            {
+                L1 = origin.OrderByDescending(p => p.ExamApproved().Count).ToList();
+                sortme(L1);
+            }
+                
+            if(FilterDateCheckBox.Checked)
+            {
+                DateTime d1 = FilterDatePickerFrom.Value;
+                DateTime d2 = FilterDatePickerTo.Value;
+                L2 = L1.Where(p => p.date.CompareTo(d1) >= 0 && p.date.CompareTo(d2) <= 0).ToList();
+                sortme(L2);
+            }
+
+            if (FilterSubjectCheckBox.Checked)
+            {
+                L3 = L2.OrderByDescending(p => p.subject.codeId).ToList();
+                L3.Sort();
+                sortme(L3);
+            }
+        }
+
+        public void sortme(List<Exam> origin)
+        {
+            ExamFilterListBox.Items.Clear();
+            foreach (Exam element in origin)
+            {
+                ExamFilterListBox.Items.Add(element.ToString());
+            }
+        }
+
     }
 }

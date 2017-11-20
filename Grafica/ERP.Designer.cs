@@ -39,7 +39,9 @@
             this.btnDeleteStudent = new System.Windows.Forms.Button();
             this.btnCreateStudent = new System.Windows.Forms.Button();
             this.ModulesGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnExams = new System.Windows.Forms.Button();
             this.StudentGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnStudentPayments = new System.Windows.Forms.Button();
             this.SubjectGroupBox = new System.Windows.Forms.GroupBox();
             this.btnCreateSubject = new System.Windows.Forms.Button();
             this.btnSubjectModify = new System.Windows.Forms.Button();
@@ -91,6 +93,9 @@
             this.StudentListGroupBox = new System.Windows.Forms.GroupBox();
             this.StudentSubjectsList = new System.Windows.Forms.ListBox();
             this.StudentListBox = new System.Windows.Forms.ListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.TeacherCreateGroupBox = new System.Windows.Forms.GroupBox();
             this.btnTeacherDelete1 = new System.Windows.Forms.Button();
             this.btnTeacherModify1 = new System.Windows.Forms.Button();
@@ -179,10 +184,47 @@
             this.btnCreateNewPayment = new System.Windows.Forms.Button();
             this.DBSave = new System.Windows.Forms.Button();
             this.btnModifyDB = new System.Windows.Forms.Button();
-            this.btnStudentPayments = new System.Windows.Forms.Button();
             this.StudentPaymentListGroupBox = new System.Windows.Forms.GroupBox();
             this.PaymentsListBox = new System.Windows.Forms.ListBox();
             this.StudentListBoxPayments = new System.Windows.Forms.ListBox();
+            this.ExamsGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnExamDelete = new System.Windows.Forms.Button();
+            this.btnExamUnEnroll = new System.Windows.Forms.Button();
+            this.btnResults = new System.Windows.Forms.Button();
+            this.btnExamEnroll = new System.Windows.Forms.Button();
+            this.btnExamList = new System.Windows.Forms.Button();
+            this.btnExamCreate = new System.Windows.Forms.Button();
+            this.ExamCreateGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExamApprovalComboBox = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.ExamDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.label33 = new System.Windows.Forms.Label();
+            this.btnCreateExam1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.ExamSubjectListBox = new System.Windows.Forms.ListBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.ExamDeleteGroupBox = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.btnDeleteSelectedExam = new System.Windows.Forms.Button();
+            this.ExamsToDeleteListBox = new System.Windows.Forms.ListBox();
+            this.ExamEnrollGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnExamStudentEnroll = new System.Windows.Forms.Button();
+            this.ExamStudentEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ExamSubjectEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ExamUnenrollGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnExamStudentUnenroll = new System.Windows.Forms.Button();
+            this.ExamSubjectUnEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ExamStudentUnEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ExamFilterGroupBox = new System.Windows.Forms.GroupBox();
+            this.FilterSubjectCheckBox = new System.Windows.Forms.CheckBox();
+            this.FilterDateCheckBox = new System.Windows.Forms.CheckBox();
+            this.FilterApprovalCheckBox = new System.Windows.Forms.CheckBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.btnExamFilter = new System.Windows.Forms.Button();
+            this.ExamFilterListBox = new System.Windows.Forms.ListBox();
+            this.FilterDatePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.FilterDatePickerTo = new System.Windows.Forms.DateTimePicker();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -193,6 +235,7 @@
             this.StudentCreatGroupBox.SuspendLayout();
             this.StudentModifyGroupBox.SuspendLayout();
             this.StudentListGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.TeacherCreateGroupBox.SuspendLayout();
             this.SubjectCreateGroupBox.SuspendLayout();
             this.VanCreateGroupBox.SuspendLayout();
@@ -203,6 +246,12 @@
             this.ActivityStudentsGroupBox.SuspendLayout();
             this.PaymentCreateGroupBox.SuspendLayout();
             this.StudentPaymentListGroupBox.SuspendLayout();
+            this.ExamsGroupBox.SuspendLayout();
+            this.ExamCreateGroupBox.SuspendLayout();
+            this.ExamDeleteGroupBox.SuspendLayout();
+            this.ExamEnrollGroupBox.SuspendLayout();
+            this.ExamUnenrollGroupBox.SuspendLayout();
+            this.ExamFilterGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPayments
@@ -307,6 +356,7 @@
             // 
             // ModulesGroupBox
             // 
+            this.ModulesGroupBox.Controls.Add(this.btnExams);
             this.ModulesGroupBox.Controls.Add(this.btnSubjects);
             this.ModulesGroupBox.Controls.Add(this.BtnStudents);
             this.ModulesGroupBox.Controls.Add(this.btnPayments);
@@ -315,10 +365,20 @@
             this.ModulesGroupBox.Controls.Add(this.btnVans);
             this.ModulesGroupBox.Location = new System.Drawing.Point(12, 12);
             this.ModulesGroupBox.Name = "ModulesGroupBox";
-            this.ModulesGroupBox.Size = new System.Drawing.Size(173, 111);
+            this.ModulesGroupBox.Size = new System.Drawing.Size(173, 134);
             this.ModulesGroupBox.TabIndex = 17;
             this.ModulesGroupBox.TabStop = false;
             this.ModulesGroupBox.Text = "Modulos";
+            // 
+            // btnExams
+            // 
+            this.btnExams.Location = new System.Drawing.Point(87, 106);
+            this.btnExams.Name = "btnExams";
+            this.btnExams.Size = new System.Drawing.Size(75, 23);
+            this.btnExams.TabIndex = 12;
+            this.btnExams.Text = "Examenes";
+            this.btnExams.UseVisualStyleBackColor = true;
+            this.btnExams.Click += new System.EventHandler(this.btnExams_Click);
             // 
             // StudentGroupBox
             // 
@@ -333,6 +393,16 @@
             this.StudentGroupBox.TabIndex = 18;
             this.StudentGroupBox.TabStop = false;
             this.StudentGroupBox.Text = "Alumnos";
+            // 
+            // btnStudentPayments
+            // 
+            this.btnStudentPayments.Location = new System.Drawing.Point(87, 77);
+            this.btnStudentPayments.Name = "btnStudentPayments";
+            this.btnStudentPayments.Size = new System.Drawing.Size(75, 23);
+            this.btnStudentPayments.TabIndex = 16;
+            this.btnStudentPayments.Text = "Pagos";
+            this.btnStudentPayments.UseVisualStyleBackColor = true;
+            this.btnStudentPayments.Click += new System.EventHandler(this.btnStudentPayments_Click);
             // 
             // SubjectGroupBox
             // 
@@ -820,6 +890,7 @@
             // 
             this.StudentListGroupBox.Controls.Add(this.StudentSubjectsList);
             this.StudentListGroupBox.Controls.Add(this.StudentListBox);
+            this.StudentListGroupBox.Controls.Add(this.groupBox1);
             this.StudentListGroupBox.Location = new System.Drawing.Point(318, 378);
             this.StudentListGroupBox.Name = "StudentListGroupBox";
             this.StudentListGroupBox.Size = new System.Drawing.Size(216, 170);
@@ -843,6 +914,34 @@
             this.StudentListBox.Size = new System.Drawing.Size(94, 134);
             this.StudentListBox.TabIndex = 0;
             this.StudentListBox.SelectedIndexChanged += new System.EventHandler(this.StudentListBox_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.listBox2);
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(216, 170);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Listar Alumnos";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(111, 21);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(94, 134);
+            this.listBox1.TabIndex = 1;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(11, 21);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(94, 134);
+            this.listBox2.TabIndex = 0;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.StudentListBox_SelectedIndexChanged);
             // 
             // TeacherCreateGroupBox
             // 
@@ -1704,16 +1803,6 @@
             this.btnModifyDB.UseVisualStyleBackColor = true;
             this.btnModifyDB.Click += new System.EventHandler(this.btnModifyDB_Click);
             // 
-            // btnStudentPayments
-            // 
-            this.btnStudentPayments.Location = new System.Drawing.Point(87, 77);
-            this.btnStudentPayments.Name = "btnStudentPayments";
-            this.btnStudentPayments.Size = new System.Drawing.Size(75, 23);
-            this.btnStudentPayments.TabIndex = 16;
-            this.btnStudentPayments.Text = "Pagos";
-            this.btnStudentPayments.UseVisualStyleBackColor = true;
-            this.btnStudentPayments.Click += new System.EventHandler(this.btnStudentPayments_Click);
-            // 
             // StudentPaymentListGroupBox
             // 
             this.StudentPaymentListGroupBox.Controls.Add(this.PaymentsListBox);
@@ -1742,11 +1831,396 @@
             this.StudentListBoxPayments.TabIndex = 0;
             this.StudentListBoxPayments.SelectedIndexChanged += new System.EventHandler(this.StudentListBoxPayments_SelectedIndexChanged);
             // 
+            // ExamsGroupBox
+            // 
+            this.ExamsGroupBox.Controls.Add(this.btnExamDelete);
+            this.ExamsGroupBox.Controls.Add(this.btnExamUnEnroll);
+            this.ExamsGroupBox.Controls.Add(this.btnResults);
+            this.ExamsGroupBox.Controls.Add(this.btnExamEnroll);
+            this.ExamsGroupBox.Controls.Add(this.btnExamList);
+            this.ExamsGroupBox.Controls.Add(this.btnExamCreate);
+            this.ExamsGroupBox.Location = new System.Drawing.Point(353, 178);
+            this.ExamsGroupBox.Name = "ExamsGroupBox";
+            this.ExamsGroupBox.Size = new System.Drawing.Size(211, 170);
+            this.ExamsGroupBox.TabIndex = 36;
+            this.ExamsGroupBox.TabStop = false;
+            this.ExamsGroupBox.Text = "Examenes";
+            // 
+            // btnExamDelete
+            // 
+            this.btnExamDelete.Location = new System.Drawing.Point(106, 20);
+            this.btnExamDelete.Name = "btnExamDelete";
+            this.btnExamDelete.Size = new System.Drawing.Size(94, 23);
+            this.btnExamDelete.TabIndex = 18;
+            this.btnExamDelete.Text = "Baja";
+            this.btnExamDelete.UseVisualStyleBackColor = true;
+            this.btnExamDelete.Click += new System.EventHandler(this.btnExamDelete_Click);
+            // 
+            // btnExamUnEnroll
+            // 
+            this.btnExamUnEnroll.Location = new System.Drawing.Point(106, 49);
+            this.btnExamUnEnroll.Name = "btnExamUnEnroll";
+            this.btnExamUnEnroll.Size = new System.Drawing.Size(94, 23);
+            this.btnExamUnEnroll.TabIndex = 17;
+            this.btnExamUnEnroll.Text = "Baja Inscripción";
+            this.btnExamUnEnroll.UseVisualStyleBackColor = true;
+            this.btnExamUnEnroll.Click += new System.EventHandler(this.btnExamUnEnroll_Click);
+            // 
+            // btnResults
+            // 
+            this.btnResults.Location = new System.Drawing.Point(106, 78);
+            this.btnResults.Name = "btnResults";
+            this.btnResults.Size = new System.Drawing.Size(94, 23);
+            this.btnResults.TabIndex = 16;
+            this.btnResults.Text = "Resultados";
+            this.btnResults.UseVisualStyleBackColor = true;
+            this.btnResults.Click += new System.EventHandler(this.btnResults_Click);
+            // 
+            // btnExamEnroll
+            // 
+            this.btnExamEnroll.Location = new System.Drawing.Point(6, 49);
+            this.btnExamEnroll.Name = "btnExamEnroll";
+            this.btnExamEnroll.Size = new System.Drawing.Size(94, 23);
+            this.btnExamEnroll.TabIndex = 15;
+            this.btnExamEnroll.Text = "Alta Inscripción";
+            this.btnExamEnroll.UseVisualStyleBackColor = true;
+            this.btnExamEnroll.Click += new System.EventHandler(this.btnExamEnroll_Click);
+            // 
+            // btnExamList
+            // 
+            this.btnExamList.Location = new System.Drawing.Point(6, 78);
+            this.btnExamList.Name = "btnExamList";
+            this.btnExamList.Size = new System.Drawing.Size(94, 23);
+            this.btnExamList.TabIndex = 14;
+            this.btnExamList.Text = "Listar";
+            this.btnExamList.UseVisualStyleBackColor = true;
+            this.btnExamList.Click += new System.EventHandler(this.btnExamList_Click);
+            // 
+            // btnExamCreate
+            // 
+            this.btnExamCreate.Location = new System.Drawing.Point(6, 20);
+            this.btnExamCreate.Name = "btnExamCreate";
+            this.btnExamCreate.Size = new System.Drawing.Size(94, 23);
+            this.btnExamCreate.TabIndex = 13;
+            this.btnExamCreate.Text = "Alta";
+            this.btnExamCreate.UseVisualStyleBackColor = true;
+            this.btnExamCreate.Click += new System.EventHandler(this.btnExamCreate_Click);
+            // 
+            // ExamCreateGroupBox
+            // 
+            this.ExamCreateGroupBox.Controls.Add(this.ExamApprovalComboBox);
+            this.ExamCreateGroupBox.Controls.Add(this.label34);
+            this.ExamCreateGroupBox.Controls.Add(this.ExamDatePicker);
+            this.ExamCreateGroupBox.Controls.Add(this.label33);
+            this.ExamCreateGroupBox.Controls.Add(this.btnCreateExam1);
+            this.ExamCreateGroupBox.Controls.Add(this.button4);
+            this.ExamCreateGroupBox.Controls.Add(this.ExamSubjectListBox);
+            this.ExamCreateGroupBox.Controls.Add(this.label30);
+            this.ExamCreateGroupBox.Controls.Add(this.button5);
+            this.ExamCreateGroupBox.Location = new System.Drawing.Point(481, 6);
+            this.ExamCreateGroupBox.Name = "ExamCreateGroupBox";
+            this.ExamCreateGroupBox.Size = new System.Drawing.Size(205, 170);
+            this.ExamCreateGroupBox.TabIndex = 30;
+            this.ExamCreateGroupBox.TabStop = false;
+            this.ExamCreateGroupBox.Text = "Alta Examen";
+            // 
+            // ExamApprovalComboBox
+            // 
+            this.ExamApprovalComboBox.FormattingEnabled = true;
+            this.ExamApprovalComboBox.Location = new System.Drawing.Point(64, 57);
+            this.ExamApprovalComboBox.Name = "ExamApprovalComboBox";
+            this.ExamApprovalComboBox.Size = new System.Drawing.Size(130, 21);
+            this.ExamApprovalComboBox.TabIndex = 33;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(6, 55);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(49, 13);
+            this.label34.TabIndex = 32;
+            this.label34.Text = "Approval";
+            // 
+            // ExamDatePicker
+            // 
+            this.ExamDatePicker.Location = new System.Drawing.Point(64, 23);
+            this.ExamDatePicker.Name = "ExamDatePicker";
+            this.ExamDatePicker.Size = new System.Drawing.Size(130, 20);
+            this.ExamDatePicker.TabIndex = 31;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(6, 23);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(30, 13);
+            this.label33.TabIndex = 30;
+            this.label33.Text = "Date";
+            // 
+            // btnCreateExam1
+            // 
+            this.btnCreateExam1.Location = new System.Drawing.Point(65, 141);
+            this.btnCreateExam1.Name = "btnCreateExam1";
+            this.btnCreateExam1.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateExam1.TabIndex = 27;
+            this.btnCreateExam1.Text = "Crear";
+            this.btnCreateExam1.UseVisualStyleBackColor = true;
+            this.btnCreateExam1.Click += new System.EventHandler(this.btnCreateExam1_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(65, 141);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "Buscar";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // ExamSubjectListBox
+            // 
+            this.ExamSubjectListBox.FormattingEnabled = true;
+            this.ExamSubjectListBox.Location = new System.Drawing.Point(64, 88);
+            this.ExamSubjectListBox.Name = "ExamSubjectListBox";
+            this.ExamSubjectListBox.Size = new System.Drawing.Size(130, 43);
+            this.ExamSubjectListBox.TabIndex = 25;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 88);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(48, 13);
+            this.label30.TabIndex = 21;
+            this.label30.Text = "Subjects";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(64, 141);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "Crear";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // ExamDeleteGroupBox
+            // 
+            this.ExamDeleteGroupBox.Controls.Add(this.label36);
+            this.ExamDeleteGroupBox.Controls.Add(this.btnDeleteSelectedExam);
+            this.ExamDeleteGroupBox.Controls.Add(this.ExamsToDeleteListBox);
+            this.ExamDeleteGroupBox.Location = new System.Drawing.Point(32, 473);
+            this.ExamDeleteGroupBox.Name = "ExamDeleteGroupBox";
+            this.ExamDeleteGroupBox.Size = new System.Drawing.Size(205, 181);
+            this.ExamDeleteGroupBox.TabIndex = 34;
+            this.ExamDeleteGroupBox.TabStop = false;
+            this.ExamDeleteGroupBox.Text = "Baja Examen";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(6, 23);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(38, 13);
+            this.label36.TabIndex = 30;
+            this.label36.Text = "Exams";
+            // 
+            // btnDeleteSelectedExam
+            // 
+            this.btnDeleteSelectedExam.Location = new System.Drawing.Point(119, 141);
+            this.btnDeleteSelectedExam.Name = "btnDeleteSelectedExam";
+            this.btnDeleteSelectedExam.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteSelectedExam.TabIndex = 27;
+            this.btnDeleteSelectedExam.Text = "Borrar";
+            this.btnDeleteSelectedExam.UseVisualStyleBackColor = true;
+            this.btnDeleteSelectedExam.Click += new System.EventHandler(this.btnDeleteSelectedExam_Click);
+            // 
+            // ExamsToDeleteListBox
+            // 
+            this.ExamsToDeleteListBox.FormattingEnabled = true;
+            this.ExamsToDeleteListBox.Location = new System.Drawing.Point(64, 23);
+            this.ExamsToDeleteListBox.Name = "ExamsToDeleteListBox";
+            this.ExamsToDeleteListBox.Size = new System.Drawing.Size(130, 108);
+            this.ExamsToDeleteListBox.TabIndex = 25;
+            // 
+            // ExamEnrollGroupBox
+            // 
+            this.ExamEnrollGroupBox.Controls.Add(this.btnExamStudentEnroll);
+            this.ExamEnrollGroupBox.Controls.Add(this.ExamStudentEnrollListBox);
+            this.ExamEnrollGroupBox.Controls.Add(this.ExamSubjectEnrollListBox);
+            this.ExamEnrollGroupBox.Location = new System.Drawing.Point(243, 569);
+            this.ExamEnrollGroupBox.Name = "ExamEnrollGroupBox";
+            this.ExamEnrollGroupBox.Size = new System.Drawing.Size(216, 170);
+            this.ExamEnrollGroupBox.TabIndex = 27;
+            this.ExamEnrollGroupBox.TabStop = false;
+            this.ExamEnrollGroupBox.Text = "Examen Alta Inscripción";
+            // 
+            // btnExamStudentEnroll
+            // 
+            this.btnExamStudentEnroll.Location = new System.Drawing.Point(111, 135);
+            this.btnExamStudentEnroll.Name = "btnExamStudentEnroll";
+            this.btnExamStudentEnroll.Size = new System.Drawing.Size(94, 23);
+            this.btnExamStudentEnroll.TabIndex = 28;
+            this.btnExamStudentEnroll.Text = "Inscribir";
+            this.btnExamStudentEnroll.UseVisualStyleBackColor = true;
+            this.btnExamStudentEnroll.Click += new System.EventHandler(this.btnExamStudentEnroll_Click);
+            // 
+            // ExamStudentEnrollListBox
+            // 
+            this.ExamStudentEnrollListBox.FormattingEnabled = true;
+            this.ExamStudentEnrollListBox.Location = new System.Drawing.Point(111, 21);
+            this.ExamStudentEnrollListBox.Name = "ExamStudentEnrollListBox";
+            this.ExamStudentEnrollListBox.Size = new System.Drawing.Size(94, 108);
+            this.ExamStudentEnrollListBox.TabIndex = 1;
+            this.ExamStudentEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamStudentEnrollListBox_SelectedIndexChanged);
+            // 
+            // ExamSubjectEnrollListBox
+            // 
+            this.ExamSubjectEnrollListBox.FormattingEnabled = true;
+            this.ExamSubjectEnrollListBox.Location = new System.Drawing.Point(11, 21);
+            this.ExamSubjectEnrollListBox.Name = "ExamSubjectEnrollListBox";
+            this.ExamSubjectEnrollListBox.Size = new System.Drawing.Size(94, 108);
+            this.ExamSubjectEnrollListBox.TabIndex = 0;
+            this.ExamSubjectEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamSubjectEnrollListBox_SelectedIndexChanged);
+            // 
+            // ExamUnenrollGroupBox
+            // 
+            this.ExamUnenrollGroupBox.Controls.Add(this.btnExamStudentUnenroll);
+            this.ExamUnenrollGroupBox.Controls.Add(this.ExamSubjectUnEnrollListBox);
+            this.ExamUnenrollGroupBox.Controls.Add(this.ExamStudentUnEnrollListBox);
+            this.ExamUnenrollGroupBox.Location = new System.Drawing.Point(470, 585);
+            this.ExamUnenrollGroupBox.Name = "ExamUnenrollGroupBox";
+            this.ExamUnenrollGroupBox.Size = new System.Drawing.Size(216, 170);
+            this.ExamUnenrollGroupBox.TabIndex = 37;
+            this.ExamUnenrollGroupBox.TabStop = false;
+            this.ExamUnenrollGroupBox.Text = "Examen Baja Inscripción";
+            // 
+            // btnExamStudentUnenroll
+            // 
+            this.btnExamStudentUnenroll.Location = new System.Drawing.Point(105, 135);
+            this.btnExamStudentUnenroll.Name = "btnExamStudentUnenroll";
+            this.btnExamStudentUnenroll.Size = new System.Drawing.Size(100, 23);
+            this.btnExamStudentUnenroll.TabIndex = 28;
+            this.btnExamStudentUnenroll.Text = "Borrar Inscripción";
+            this.btnExamStudentUnenroll.UseVisualStyleBackColor = true;
+            this.btnExamStudentUnenroll.Click += new System.EventHandler(this.btnExamStudentUnenroll_Click);
+            // 
+            // ExamSubjectUnEnrollListBox
+            // 
+            this.ExamSubjectUnEnrollListBox.FormattingEnabled = true;
+            this.ExamSubjectUnEnrollListBox.Location = new System.Drawing.Point(6, 19);
+            this.ExamSubjectUnEnrollListBox.Name = "ExamSubjectUnEnrollListBox";
+            this.ExamSubjectUnEnrollListBox.Size = new System.Drawing.Size(94, 108);
+            this.ExamSubjectUnEnrollListBox.TabIndex = 1;
+            this.ExamSubjectUnEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamSubjectUnEnrollListBox_SelectedIndexChanged);
+            // 
+            // ExamStudentUnEnrollListBox
+            // 
+            this.ExamStudentUnEnrollListBox.FormattingEnabled = true;
+            this.ExamStudentUnEnrollListBox.Location = new System.Drawing.Point(106, 19);
+            this.ExamStudentUnEnrollListBox.Name = "ExamStudentUnEnrollListBox";
+            this.ExamStudentUnEnrollListBox.Size = new System.Drawing.Size(94, 108);
+            this.ExamStudentUnEnrollListBox.TabIndex = 0;
+            this.ExamStudentUnEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamStudentUnEnrollListBox_SelectedIndexChanged);
+            // 
+            // ExamFilterGroupBox
+            // 
+            this.ExamFilterGroupBox.Controls.Add(this.FilterDatePickerTo);
+            this.ExamFilterGroupBox.Controls.Add(this.FilterDatePickerFrom);
+            this.ExamFilterGroupBox.Controls.Add(this.FilterSubjectCheckBox);
+            this.ExamFilterGroupBox.Controls.Add(this.FilterDateCheckBox);
+            this.ExamFilterGroupBox.Controls.Add(this.FilterApprovalCheckBox);
+            this.ExamFilterGroupBox.Controls.Add(this.label35);
+            this.ExamFilterGroupBox.Controls.Add(this.btnExamFilter);
+            this.ExamFilterGroupBox.Controls.Add(this.ExamFilterListBox);
+            this.ExamFilterGroupBox.Location = new System.Drawing.Point(769, 530);
+            this.ExamFilterGroupBox.Name = "ExamFilterGroupBox";
+            this.ExamFilterGroupBox.Size = new System.Drawing.Size(205, 240);
+            this.ExamFilterGroupBox.TabIndex = 35;
+            this.ExamFilterGroupBox.TabStop = false;
+            this.ExamFilterGroupBox.Text = "Filtrar Examenes";
+            // 
+            // FilterSubjectCheckBox
+            // 
+            this.FilterSubjectCheckBox.AutoSize = true;
+            this.FilterSubjectCheckBox.Location = new System.Drawing.Point(6, 183);
+            this.FilterSubjectCheckBox.Name = "FilterSubjectCheckBox";
+            this.FilterSubjectCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.FilterSubjectCheckBox.TabIndex = 33;
+            this.FilterSubjectCheckBox.Text = "Numero Materia";
+            this.FilterSubjectCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // FilterDateCheckBox
+            // 
+            this.FilterDateCheckBox.AutoSize = true;
+            this.FilterDateCheckBox.Location = new System.Drawing.Point(6, 160);
+            this.FilterDateCheckBox.Name = "FilterDateCheckBox";
+            this.FilterDateCheckBox.Size = new System.Drawing.Size(61, 17);
+            this.FilterDateCheckBox.TabIndex = 32;
+            this.FilterDateCheckBox.Text = "Fechas";
+            this.FilterDateCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // FilterApprovalCheckBox
+            // 
+            this.FilterApprovalCheckBox.AutoSize = true;
+            this.FilterApprovalCheckBox.Location = new System.Drawing.Point(6, 137);
+            this.FilterApprovalCheckBox.Name = "FilterApprovalCheckBox";
+            this.FilterApprovalCheckBox.Size = new System.Drawing.Size(77, 17);
+            this.FilterApprovalCheckBox.TabIndex = 31;
+            this.FilterApprovalCheckBox.Text = "Aprobados";
+            this.FilterApprovalCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(6, 23);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(38, 13);
+            this.label35.TabIndex = 30;
+            this.label35.Text = "Exams";
+            // 
+            // btnExamFilter
+            // 
+            this.btnExamFilter.Location = new System.Drawing.Point(124, 211);
+            this.btnExamFilter.Name = "btnExamFilter";
+            this.btnExamFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnExamFilter.TabIndex = 27;
+            this.btnExamFilter.Text = "Filtrar";
+            this.btnExamFilter.UseVisualStyleBackColor = true;
+            this.btnExamFilter.Click += new System.EventHandler(this.btnExamFilter_Click);
+            // 
+            // ExamFilterListBox
+            // 
+            this.ExamFilterListBox.FormattingEnabled = true;
+            this.ExamFilterListBox.Location = new System.Drawing.Point(65, 23);
+            this.ExamFilterListBox.Name = "ExamFilterListBox";
+            this.ExamFilterListBox.Size = new System.Drawing.Size(130, 108);
+            this.ExamFilterListBox.TabIndex = 25;
+            // 
+            // FilterDatePickerFrom
+            // 
+            this.FilterDatePickerFrom.Location = new System.Drawing.Point(66, 155);
+            this.FilterDatePickerFrom.Name = "FilterDatePickerFrom";
+            this.FilterDatePickerFrom.Size = new System.Drawing.Size(61, 20);
+            this.FilterDatePickerFrom.TabIndex = 34;
+            // 
+            // FilterDatePickerTo
+            // 
+            this.FilterDatePickerTo.Location = new System.Drawing.Point(133, 155);
+            this.FilterDatePickerTo.Name = "FilterDatePickerTo";
+            this.FilterDatePickerTo.Size = new System.Drawing.Size(61, 20);
+            this.FilterDatePickerTo.TabIndex = 35;
+            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 527);
+            this.ClientSize = new System.Drawing.Size(1034, 782);
+            this.Controls.Add(this.ExamFilterGroupBox);
+            this.Controls.Add(this.ExamUnenrollGroupBox);
+            this.Controls.Add(this.ExamEnrollGroupBox);
+            this.Controls.Add(this.ExamDeleteGroupBox);
+            this.Controls.Add(this.ExamCreateGroupBox);
+            this.Controls.Add(this.ExamsGroupBox);
+            this.Controls.Add(this.ModulesGroupBox);
             this.Controls.Add(this.StudentPaymentListGroupBox);
             this.Controls.Add(this.StudentGroupBox);
             this.Controls.Add(this.btnModifyDB);
@@ -1770,7 +2244,6 @@
             this.Controls.Add(this.ActivityGroupBox);
             this.Controls.Add(this.PaymentGroupBox);
             this.Controls.Add(this.SubjectGroupBox);
-            this.Controls.Add(this.ModulesGroupBox);
             this.Name = "ERP";
             this.Text = "ERP";
             this.ModulesGroupBox.ResumeLayout(false);
@@ -1785,6 +2258,7 @@
             this.StudentModifyGroupBox.ResumeLayout(false);
             this.StudentModifyGroupBox.PerformLayout();
             this.StudentListGroupBox.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.TeacherCreateGroupBox.ResumeLayout(false);
             this.TeacherCreateGroupBox.PerformLayout();
             this.SubjectCreateGroupBox.ResumeLayout(false);
@@ -1804,6 +2278,15 @@
             this.PaymentCreateGroupBox.ResumeLayout(false);
             this.PaymentCreateGroupBox.PerformLayout();
             this.StudentPaymentListGroupBox.ResumeLayout(false);
+            this.ExamsGroupBox.ResumeLayout(false);
+            this.ExamCreateGroupBox.ResumeLayout(false);
+            this.ExamCreateGroupBox.PerformLayout();
+            this.ExamDeleteGroupBox.ResumeLayout(false);
+            this.ExamDeleteGroupBox.PerformLayout();
+            this.ExamEnrollGroupBox.ResumeLayout(false);
+            this.ExamUnenrollGroupBox.ResumeLayout(false);
+            this.ExamFilterGroupBox.ResumeLayout(false);
+            this.ExamFilterGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1965,5 +2448,47 @@
         private System.Windows.Forms.GroupBox StudentPaymentListGroupBox;
         private System.Windows.Forms.ListBox PaymentsListBox;
         private System.Windows.Forms.ListBox StudentListBoxPayments;
+        private System.Windows.Forms.Button btnExams;
+        private System.Windows.Forms.GroupBox ExamsGroupBox;
+        private System.Windows.Forms.Button btnExamDelete;
+        private System.Windows.Forms.Button btnExamUnEnroll;
+        private System.Windows.Forms.Button btnResults;
+        private System.Windows.Forms.Button btnExamEnroll;
+        private System.Windows.Forms.Button btnExamList;
+        private System.Windows.Forms.Button btnExamCreate;
+        private System.Windows.Forms.GroupBox ExamCreateGroupBox;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Button btnCreateExam1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ListBox ExamSubjectListBox;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DateTimePicker ExamDatePicker;
+        private System.Windows.Forms.ComboBox ExamApprovalComboBox;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.GroupBox ExamDeleteGroupBox;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Button btnDeleteSelectedExam;
+        private System.Windows.Forms.ListBox ExamsToDeleteListBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.GroupBox ExamEnrollGroupBox;
+        private System.Windows.Forms.Button btnExamStudentEnroll;
+        private System.Windows.Forms.ListBox ExamStudentEnrollListBox;
+        private System.Windows.Forms.ListBox ExamSubjectEnrollListBox;
+        private System.Windows.Forms.GroupBox ExamUnenrollGroupBox;
+        private System.Windows.Forms.Button btnExamStudentUnenroll;
+        private System.Windows.Forms.ListBox ExamSubjectUnEnrollListBox;
+        private System.Windows.Forms.ListBox ExamStudentUnEnrollListBox;
+        private System.Windows.Forms.GroupBox ExamFilterGroupBox;
+        private System.Windows.Forms.CheckBox FilterSubjectCheckBox;
+        private System.Windows.Forms.CheckBox FilterDateCheckBox;
+        private System.Windows.Forms.CheckBox FilterApprovalCheckBox;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button btnExamFilter;
+        private System.Windows.Forms.ListBox ExamFilterListBox;
+        private System.Windows.Forms.DateTimePicker FilterDatePickerTo;
+        private System.Windows.Forms.DateTimePicker FilterDatePickerFrom;
     }
 }

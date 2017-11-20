@@ -13,14 +13,16 @@ namespace Dominio
         public List<Subject> allsubjects { get; set; }
         public List<Van> allvans { get; set; }
         public List<Activity> allactivities { get; set; }
-        
+        public List<Exam> allexams { get; set; }
+
         public ERPsystem()
         {
             allteachers = new List<Teacher>();
             allsubjects = new List<Subject>();
             allstudents = new List<Student>();
             allvans = new List<Van>();
-            allactivities = new List<Activity>(); 
+            allactivities = new List<Activity>();
+            allexams = new List<Exam>(); 
         }
         public List<Teacher> showallteachers()
         {
@@ -50,6 +52,10 @@ namespace Dominio
         public List<Activity> showallactivities()
         {
             return allactivities;
+        }
+        public List<Exam> showallexams()
+        {
+            return allexams;
         }
 
         public Student searchStudent(int Number)
@@ -93,6 +99,16 @@ namespace Dominio
             return found;
         }
 
+        public Exam searchExam(int id)
+        {
+            Exam found = null;
+            foreach (Exam item in allexams)
+            {
+                if (item.ExamId.Equals(id))
+                    found = item;
+            }
+            return found;
+        }
 
         public void DeleteStudent(Student StudentToDelete)
         {
@@ -137,6 +153,15 @@ namespace Dominio
                 allactivities.Remove(ActivityToDelete);
             }
         }
+        public void DeleteExam(Exam ExamToDelete)
+        {
+            if(allexams.Contains(ExamToDelete))
+            {
+                allexams.Remove(ExamToDelete);
+            }
+        }
+
+
         public float distance(Student student)
         {
             return student.GetX() + student.GetY();
@@ -232,7 +257,24 @@ namespace Dominio
             mysystem.showallvans().Add(v1);
             mysystem.showallvans().Add(v2);
             mysystem.showallvans().Add(v3);
-
+            Exam e1 = new Exam() { ExamId = 1, approval = 3, subject = sub1, date = DateTime.MaxValue };
+            Exam e2 = new Exam() { ExamId = 2, approval = 6, subject = sub2 };
+            Exam e3 = new Exam() { ExamId = 3, approval = 9, subject = sub3 };
+            //all students approved
+            e1.ExamEnrollStudent(s1, 0); e1.qualify(s1, 12);
+            e1.ExamEnrollStudent(s2, 0); e1.qualify(s2, 12);
+            e1.ExamEnrollStudent(s3, 0); e1.qualify(s3, 12);
+            //all students failed
+            e2.ExamEnrollStudent(s1, 0); e2.qualify(s1, 0);
+            e2.ExamEnrollStudent(s2, 0); e2.qualify(s2, 0);
+            e2.ExamEnrollStudent(s3, 0); e2.qualify(s3, 0);
+            //some students fail
+            e3.ExamEnrollStudent(s1, 0); e3.qualify(s1, 3);
+            e3.ExamEnrollStudent(s2, 0); e3.qualify(s2, 6);
+            e3.ExamEnrollStudent(s3, 0); e3.qualify(s3, 9);
+            mysystem.allexams.Add(e1);
+            mysystem.allexams.Add(e2);
+            mysystem.allexams.Add(e3);
             return mysystem;
         }
     }
