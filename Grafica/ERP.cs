@@ -56,6 +56,7 @@ namespace Solucion2
             ExamEnrollGroupBox.Visible = false;
             ExamUnenrollGroupBox.Visible = false;
             ExamFilterGroupBox.Visible = false;
+            ExamScoreGroupBox.Visible = false;
             btnSubjectSearch.Hide();
             btnSubjectSearchModify.Hide();
             btnSubjectSearchModify1.Hide();
@@ -161,12 +162,21 @@ namespace Solucion2
             {
                 ActivityListBox.Items.Add(element.ToString());
             }
+
+            ScoreExams.Items.Clear();
+            foreach (Exam element in mysystem.allexams)
+            {
+                ScoreExams.Items.Add(element.ToString());
+            }
+
             comboBox1.Items.Clear();
             ExamApprovalComboBox.Items.Clear();
+            ScoreComboBox.Items.Clear();
             for (int i = 1; i <= 12; i++)
             {
                 comboBox1.Items.Add(i.ToString());
                 ExamApprovalComboBox.Items.Add(i.ToString());
+                ScoreComboBox.Items.Add(i.ToString());
             }
     }
 
@@ -355,13 +365,6 @@ namespace Solucion2
             hideallgrouboxes();
         }
 
-        private void btnCreateSubject_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-
-
         private void btnSubjectList_Click(object sender, EventArgs e)
         {
             hideallgrouboxes();
@@ -406,6 +409,7 @@ namespace Solucion2
             SubjectStudentListBox.Show();
             SubjectTeachersListBox.Show();
             textBox12.Show();
+            btnCreateNewSubject.Show();
             refreshdata();
         }
 
@@ -414,6 +418,22 @@ namespace Solucion2
             Subject createdSubject = new Subject();
             createdSubject.EditSubjectCode(Int32.Parse(textBox11.Text)); textBox11.Text = "";
             createdSubject.EditSubjectName(textBox12.Text); textBox12.Text = "";
+            foreach (string s1 in SubjectStudentListBox.SelectedItems)
+            {
+                string[] subStrings = s1.Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
+                searchedStudent.subjects.Add(createdSubject);
+                createdSubject.students.Add(searchedStudent);
+
+            }
+            foreach (string s2 in SubjectTeachersListBox.SelectedItems)
+            {
+                string[] subStrings = s2.Split(' ');
+                searchedTeacher = mysystem.searchTeacher((subStrings[1]));
+                searchedTeacher.subjects.Add(createdSubject);
+                createdSubject.teachers.Add(searchedTeacher);
+            }
+
             mysystem.showallsubjects().Add(createdSubject);
             hideallgrouboxes();
         }
@@ -1159,8 +1179,6 @@ namespace Solucion2
             {
                 ExamSubjectEnrollListBox.Items.Add(element.ToString());
             }
-
-
         }
 
         private void btnExamUnEnroll_Click(object sender, EventArgs e)
@@ -1175,33 +1193,7 @@ namespace Solucion2
                 ExamSubjectUnEnrollListBox.Items.Add(element.ToString());
             }
         }
-
-        private void ExamSubjectEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //split del subject
-            //cargar listbox de estudiantes del subject
-        }
-
-        private void ExamStudentUnEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-            string myStringStudent = ExamStudentUnEnrollListBox.SelectedItem.ToString();
-            string[] subStrings2 = myStringStudent.Split(' ');
-            searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings2[2]));//substring2[2]= student number
-
-            ExamSubjectUnEnrollListBox.Items.Clear();
-            foreach (Subject subjectfor in searchedStudent.subjects)
-            {
-                foreach(Exam examfor in mysystem.allexams)
-                {
-                    if (examfor.subject.codeId == subjectfor.codeId)
-                        ExamSubjectUnEnrollListBox.Items.Add(examfor);
-                }
-            }
-            */
-            //cargar listbox de examens
-        }
-
+        
         private void btnExamStudentUnenroll_Click(object sender, EventArgs e)
         {
             if((ExamStudentUnEnrollListBox.SelectedItem!=null) &&(ExamSubjectUnEnrollListBox.SelectedItem != null))
@@ -1260,11 +1252,6 @@ namespace Solucion2
             ExamDeleteGroupBox.Text = "Lista de Examenes";
             refreshdata();
             btnDeleteSelectedExam.Visible = false;
-        }
-
-        private void ExamStudentEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void ExamSubjectUnEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1327,5 +1314,38 @@ namespace Solucion2
             }
         }
 
+        private void btnUpdateScore_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ExamScoreGroupBox.Show();
+            ExamScoreGroupBox.Location = DefaultPanelLocation;
+            refreshdata();
+
+        }
+
+        private void ScoreExams_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ScoreExams.SelectedItem != null)
+            {
+                string[] subStrings1 = ScoreExams.SelectedItem.ToString().Split(' ');
+                searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+                ScoreStudentsEnrolled.Items.Clear();
+                foreach (Tuple<Student, int> element in searchedExam.enrolled)
+                {
+                    ScoreStudentsEnrolled.Items.Add(element.Item1.ToString());
+                }
+            }
+            
+        }
+
+        private void btnScoreExam_Click(object sender, EventArgs e)
+        {
+            if ((ScoreExams.SelectedItem!=null)&&(ScoreStudentsEnrolled.SelectedItem!= null))
+            {
+                string[] subStrings = ScoreStudentsEnrolled.SelectedItem.ToString().Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
+                searchedExam.qualify(searchedStudent, Int32.Parse(ScoreComboBox.SelectedItem.ToString()));
+            }
+        }
     }
 }

@@ -277,8 +277,6 @@ namespace Persistencia
         {
             Database.Connection.Open();
         }
-
-        
     }
     
 }
