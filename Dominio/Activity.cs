@@ -12,7 +12,7 @@ namespace Dominio
         public int id { get; set; }
         public DateTime date { get; set; }
         public int cost { get; set; }
-        public List<Student> students { get; set; }
+        public virtual List<Student> students { get; set; }
 
 
         public Activity()

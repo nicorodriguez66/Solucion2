@@ -783,7 +783,7 @@
             this.StudentModifyGroupBox.Controls.Add(this.textBox3);
             this.StudentModifyGroupBox.Controls.Add(this.textBox4);
             this.StudentModifyGroupBox.Controls.Add(this.btnStudentSearchModify);
-            this.StudentModifyGroupBox.Location = new System.Drawing.Point(370, 188);
+            this.StudentModifyGroupBox.Location = new System.Drawing.Point(254, 745);
             this.StudentModifyGroupBox.Name = "StudentModifyGroupBox";
             this.StudentModifyGroupBox.Size = new System.Drawing.Size(205, 170);
             this.StudentModifyGroupBox.TabIndex = 25;
@@ -2288,6 +2288,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.StudentModifyGroupBox);
             this.Controls.Add(this.ExamScoreGroupBox);
             this.Controls.Add(this.ExamFilterGroupBox);
             this.Controls.Add(this.ExamUnenrollGroupBox);
@@ -2312,7 +2313,6 @@
             this.Controls.Add(this.btnLoadData);
             this.Controls.Add(this.TeacherListGroupBox);
             this.Controls.Add(this.button27);
-            this.Controls.Add(this.StudentModifyGroupBox);
             this.Controls.Add(this.StudentCreatGroupBox);
             this.Controls.Add(this.VanGroupBox);
             this.Controls.Add(this.TeacherGroupBox);

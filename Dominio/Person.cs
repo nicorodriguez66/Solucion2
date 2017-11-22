@@ -13,6 +13,6 @@ namespace Dominio
         public int cardId { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
-        public List<Subject> subjects { get; set; }
+        public virtual List<Subject> subjects { get; set; }
     }
 }

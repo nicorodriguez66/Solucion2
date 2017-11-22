@@ -13,7 +13,7 @@ namespace Dominio
         public int number { get; set; }
         public float x { get; set; }
         public float y { get; set; }
-        public List<Payment> payments { get; set; }
+        public virtual List<Payment> payments { get; set; }
         
         public Student()
         {

@@ -18,29 +18,61 @@ namespace Persistencia
         public DbSet<Teacher> dbTeachers{ get; set; }
         public DbSet<Subject> dbSubjects { get; set; }
         public DbSet<Fee> dbFees { get; set; }
+        public DbSet<Exam> dbExams{ get; set; }
+        public DbSet<Activity> dbActivities { get; set; }
 
         string conexionstr;
 
         
         public Persistence()
         {
-            this.Database.Connection.ConnectionString= @"Data Source=.\SQLEXPRESS;Initial Catalog=Obligatorio2;Integrated Security=True";
-            conexionstr = this.Database.Connection.ConnectionString;
+            //emptybase();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public void emptybase(string dbname)
         {
+            this.Database.Connection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog="+dbname+";Integrated Security=True";
+            conexionstr = this.Database.Connection.ConnectionString;
+
+            foreach (var entity in dbExams)
+                dbExams.Remove(entity);
+            foreach (var entity in dbActivities)
+                dbActivities.Remove(entity);
+            foreach (var entity in dbFees)
+                dbFees.Remove(entity);
+            foreach (var entity in dbStudents)
+                dbStudents.Remove(entity);
+            foreach (var entity in dbSubjects)
+                dbSubjects.Remove(entity);
+            foreach (var entity in dbTeachers)
+                dbTeachers.Remove(entity);
+            foreach (var entity in dbVans)
+                dbVans.Remove(entity);
+            SaveChanges();
+        }
+        public void preloaded()
+        {
+            this.Database.Connection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Obligatorio2;Integrated Security=True";
+            conexionstr = this.Database.Connection.ConnectionString;
+            LoadAllDbs();
+        }
+
+
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            
             modelBuilder.Entity<Activity>().ToTable("Activities");
             modelBuilder.Entity<Fee>().ToTable("Fees");
             modelBuilder.Entity<Payment>().ToTable("Payments");
-            modelBuilder.Entity<Person>().ToTable("Persons");
-            modelBuilder.Entity<Student>().ToTable("Students");
-            modelBuilder.Entity<Subject>().ToTable("Subjects");
+            modelBuilder.Entity<Person>().ToTable("Persons");           
+            modelBuilder.Entity<Student>().ToTable("Students");                        
+            modelBuilder.Entity<Subject>().ToTable("Subjects");            
             modelBuilder.Entity<Teacher>().ToTable("Teachers");
             modelBuilder.Entity<Van>().ToTable("Vans");
-            //modelBuilder.Entity<Teacher>().ToTable("Teacher");
-        }
-
+            modelBuilder.Entity<Exam>().ToTable("Exams");
+          
+         }
+        */
 
 
         public bool connected()
@@ -57,6 +89,16 @@ namespace Persistencia
                 odbcEx.Data.ToString();
             }
             return estado;
+        }
+
+        public void LoadAllDbs()
+        {            
+            dbExams.Load();
+            dbFees.Load();
+            dbStudents.Load();
+            dbSubjects.Load();
+            dbTeachers.Load();
+            dbVans.Load();
         }
 
         public bool Conected()
@@ -76,6 +118,18 @@ namespace Persistencia
                 }
             }
             return estado;
+        }
+
+        public void SaveExam(Exam ExamToSave)
+        {
+            StartConnection();
+            using (var db = new Persistence())
+            {
+                db.dbExams.Add(ExamToSave);
+                db.SaveChanges();
+                db.dbExams.Load();
+            }
+            EndConnection();
         }
 
         public void SaveVan(Van VanToSave)
@@ -102,37 +156,77 @@ namespace Persistencia
             EndConnection();
         }
 
-
-
-
+        public void SaveActivity(Activity ActivityToSave)
+        {
+            StartConnection();
+            using (var db = new Persistence())
+            {
+                db.dbActivities.Add(ActivityToSave);
+                db.SaveChanges();
+                db.dbFees.Load();
+            }
+            EndConnection();
+        }
 
         public bool SaveStudent(Student StudentToSave)
         {
-            if (Conected()) { 
-            StartConnection();
-            if (connected())
+            if (Conected())
             {
-                dbStudents.Add(StudentToSave);
-                SaveChanges();
-                dbStudents.Load();
-            }
-            else
-            {
-                MessageBox.Show("La conexión con la base de datos no esta disponible");
-            }
-            EndConnection();
+                StartConnection();
+                if (connected())
+                {
+                    dbStudents.Add(StudentToSave);
+                    SaveChanges();
+                    dbStudents.Load();
+                }
+                else
+                {
+                    MessageBox.Show("La conexión con la base de datos no esta disponible");
+                }
+                EndConnection();
             }
             return Conected();
         }
-        public void SaveTeacher(Teacher TeacherToSave)
+
+        public void DeleteStudent(Student dummy)
         {
-            StartConnection();
-            dbTeachers.Add(TeacherToSave);
-            SaveChanges();
-            dbStudents.Load();
-            EndConnection();
+            if (Conected())
+            {
+                StartConnection();
+                if (connected())
+                {
+                    dbStudents.Remove(dummy);
+                    SaveChanges();
+                    dbStudents.Load();
+                }
+                else
+                {
+                    MessageBox.Show("La conexión con la base de datos no esta disponible");
+                }
+                EndConnection();
+            }
         }
 
+
+        public bool SaveTeacher(Teacher TeacherToSave)
+        {
+            if (Conected())
+            {
+                StartConnection();
+                if (connected())
+                {
+                    dbTeachers.Add(TeacherToSave);
+                    SaveChanges();
+                    dbStudents.Load();
+                }
+                else
+                {
+                    MessageBox.Show("La conexión con la base de datos no esta disponible");
+                }
+                EndConnection();
+            }
+            return Conected();
+        }
         public void SaveSubject(Subject SubjectToSave)
         {
             StartConnection();
@@ -206,17 +300,21 @@ namespace Persistencia
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "UPDATE Students SET  number = " + OneStudent.number.ToString() + ", x = '" + OneStudent.x.ToString() + "' , y = '" + OneStudent.y.ToString() +  "' WHERE CardId = " + OneStudent.cardId.ToString();
-                      
-
+            cmd.CommandText = "UPDATE Students SET  name = '" + 
+                OneStudent.name.ToString() + "', surname = '" + 
+                OneStudent.surname.ToString() + "',number = " +
+                OneStudent.number.ToString() + ", x = '" +
+                OneStudent.x.ToString() + "' , y = '" + 
+                OneStudent.y.ToString() +  "' WHERE CardId = " + 
+                OneStudent.cardId.ToString();                      
             SqlConnection sc = new SqlConnection();
             sc.ConnectionString = conexionstr;
 
             cmd.Connection = sc;
             cmd.Connection.Open();
             cmd.ExecuteNonQuery();
-            cmd.CommandText = "UPDATE Persons SET  name = '" + OneStudent.name.ToString() + "', surname = '" + OneStudent.surname.ToString() + "' WHERE CardId = " + OneStudent.cardId.ToString();
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE Persons SET  name = '" + OneStudent.name.ToString() + "', surname = '" + OneStudent.surname.ToString() + "' WHERE CardId = " + OneStudent.cardId.ToString();
+           // cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
 
@@ -224,7 +322,10 @@ namespace Persistencia
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "UPDATE Persons SET  name  = '" + OneTeacher.name.ToString() + "', surname = '" + OneTeacher.surname.ToString() + "' WHERE CardId = " + OneTeacher.cardId.ToString();
+            cmd.CommandText = "UPDATE Teachers SET  name  = '" +
+                OneTeacher.name.ToString() + "', surname = '" + 
+                OneTeacher.surname.ToString() + "' WHERE CardId = " + 
+                OneTeacher.cardId.ToString();
             SqlConnection sc = new SqlConnection();
             sc.ConnectionString = conexionstr;
 
@@ -269,6 +370,19 @@ namespace Persistencia
             return dbVans.ToList();
         }
 
+        public List<Van> GetVans1(int param)
+        {
+            using (Persistence db = new Persistence())
+            {
+                var query = from p in db.dbVans
+                            where p.VanId == param
+                            select p ;
+                return query.ToList<Van>();
+            }
+                
+        }
+
+
         private void EndConnection()
         {
             Database.Connection.Close();
@@ -277,6 +391,7 @@ namespace Persistencia
         {
             Database.Connection.Open();
         }
+
     }
     
 }

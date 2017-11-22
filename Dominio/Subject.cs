@@ -14,8 +14,8 @@ namespace Dominio
         [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int codeId { get; set; }
-        public List<Student> students { get; set; }
-        public List<Teacher> teachers { get; set; }
+        public virtual List<Student> students { get; set; }
+        public virtual List<Teacher> teachers { get; set; }
         public Subject()
         {
             students = new List<Student>();

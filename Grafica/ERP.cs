@@ -22,6 +22,7 @@ namespace Solucion2
         private Activity searchedActivity;
         private Exam searchedExam;
         private Point DefaultPanelLocation;
+        private Persistence dbmanager;
         public ERP()
         {
             InitializeComponent();
@@ -29,8 +30,48 @@ namespace Solucion2
             DefaultPanelLocation.Y = ModulesGroupBox.Location.Y;
             this.Size = new Size(500, 500);
             mysystem = new ERPsystem();
+            dbmanager = new Persistence();
+            empty();
             hideallgrouboxes();
         }
+
+        private void ToDb()
+        {
+            foreach (Activity element in mysystem.allactivities)
+            {
+                dbmanager.dbActivities.Add(element);
+            }
+
+            foreach (Exam element in mysystem.allexams)
+            {
+                dbmanager.dbExams.Add(element);
+            }
+            foreach(Student element in mysystem.allstudents)
+            {
+                dbmanager.dbStudents.Add(element);
+            }
+            foreach(Teacher element in mysystem.allteachers)
+            {
+                dbmanager.dbTeachers.Add(element);
+            }
+            foreach(Subject element in mysystem.allsubjects)
+            {
+                dbmanager.dbSubjects.Add(element);
+            }
+            foreach(Van element in mysystem.allvans)
+            {
+                dbmanager.dbVans.Add(element);
+            }
+            dbmanager.SaveChanges();
+            dbmanager.LoadAllDbs();
+            mysystem.allexams = dbmanager.dbExams.ToList();
+            mysystem.allstudents = dbmanager.dbStudents.ToList();
+            mysystem.allsubjects = dbmanager.dbSubjects.ToList();
+            mysystem.allteachers = dbmanager.dbTeachers.ToList();
+            mysystem.allvans = dbmanager.dbVans.ToList();
+            mysystem.allactivities= dbmanager.dbActivities.ToList();
+        }
+
 
         private void hideallgrouboxes()
         {
@@ -288,7 +329,7 @@ namespace Solucion2
             createdStudent.EditStudentSurname(studentSurnameTxtBox.Text); studentSurnameTxtBox.Text = "";
             createdStudent.EditStudentNumber(Int32.Parse(studentNumberTxtBox.Text)); studentNumberTxtBox.Text = "";
             createdStudent.EditStudentidCard(Int32.Parse(studentIdCardTxtBox.Text)); studentIdCardTxtBox.Text = "";
-            mysystem.showallstudents().Add(createdStudent);
+            mysystem.showallstudents().Add(createdStudent); dbmanager.dbStudents.Add(createdStudent); dbmanager.SaveChanges();
             hideallgrouboxes();
           }
 
@@ -296,7 +337,10 @@ namespace Solucion2
         {
             if(textBox2.Text!="")
             {
-                searchedStudent = mysystem.searchStudent(Int32.Parse(textBox2.Text));
+                //searchedStudent = mysystem.searchStudent(Int32.Parse(textBox2.Text));
+                int a = Int32.Parse(textBox2.Text);
+                
+                searchedStudent = dbmanager.dbStudents.FirstOrDefault(t=>t.number.Equals(a));
                 if (searchedStudent == null)
                 {
                     MessageBox.Show("No existe estudiante");
@@ -315,11 +359,13 @@ namespace Solucion2
         private void button26_Click(object sender, EventArgs e)
         {
             if(searchedStudent != null)
-            {
+            {                
                 searchedStudent.EditStudentName(textBox4.Text);
                 searchedStudent.EditStudentSurname(textBox3.Text);
                 searchedStudent.EditStudentNumber(Int32.Parse(textBox2.Text));
-                searchedStudent.EditStudentidCard(Int32.Parse(textBox1.Text));
+                searchedStudent.EditStudentidCard(Int32.Parse(textBox1.Text));                            
+                dbmanager.ModifyStudent(searchedStudent);
+                updatedb();
             }
             else
             {
@@ -354,9 +400,8 @@ namespace Solucion2
         {
             if (searchedStudent!= null)
             {
-                mysystem.DeleteStudent(searchedStudent);
-                searchedStudent = null;
-                
+                mysystem.DeleteStudent(searchedStudent);dbmanager.dbStudents.Remove(searchedStudent); dbmanager.SaveChanges();
+                searchedStudent = null;                
             }
             else
             {
@@ -431,10 +476,10 @@ namespace Solucion2
                 string[] subStrings = s2.Split(' ');
                 searchedTeacher = mysystem.searchTeacher((subStrings[1]));
                 searchedTeacher.subjects.Add(createdSubject);
-                createdSubject.teachers.Add(searchedTeacher);
+                createdSubject.teachers.Add(searchedTeacher); 
             }
 
-            mysystem.showallsubjects().Add(createdSubject);
+            mysystem.showallsubjects().Add(createdSubject); dbmanager.dbSubjects.Add(createdSubject); dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
@@ -457,7 +502,7 @@ namespace Solucion2
         {
             if (searchedSubject != null)
             {
-                mysystem.DeleteSubject(searchedSubject);
+                mysystem.DeleteSubject(searchedSubject);dbmanager.dbSubjects.Remove(searchedSubject);dbmanager.SaveChanges();
                 searchedSubject = null;
             }
             else
@@ -485,10 +530,11 @@ namespace Solucion2
         private void btnSubjectSearchModify_Click(object sender, EventArgs e)
         {
             if (searchedSubject!=null)
-            
             {
                 searchedSubject.EditSubjectName(textBox12.Text);
                 searchedSubject.EditSubjectCode(Int32.Parse(textBox11.Text));
+                dbmanager.ModifySubject(searchedSubject);
+                updatedb();
             }
             else
             {
@@ -509,10 +555,33 @@ namespace Solucion2
 
         private void btnLoadData_Click(object sender, EventArgs e)
         {
-            mysystem = mysystem.LoadData();
+            //mysystem = mysystem.LoadData();
+            preload();
             hideallgrouboxes();
             refreshdata();
+        }
 
+        private void empty()
+        {
+            dbmanager.emptybase("Parametro");
+            Student dummy = new Student();
+            dbmanager.SaveStudent(dummy);
+            dbmanager.DeleteStudent(dummy);
+        }
+        private void preload()
+        {
+            dbmanager.preloaded();
+            updatedb();
+        }
+        private void updatedb()
+        {
+            dbmanager.LoadAllDbs();
+            mysystem.allactivities = dbmanager.dbActivities.ToList();
+            mysystem.allexams = dbmanager.dbExams.ToList();
+            mysystem.allstudents=dbmanager.dbStudents.ToList();
+            mysystem.allsubjects=dbmanager.dbSubjects.ToList();
+            mysystem.allteachers = dbmanager.dbTeachers.ToList();
+            mysystem.allvans = dbmanager.dbVans.ToList();
         }
 
         private void btnSubjectSearchModify1_Click(object sender, EventArgs e)
@@ -520,12 +589,15 @@ namespace Solucion2
             if (textBox11.Text != "")
             {
                 searchedSubject = mysystem.searchSubject(Int32.Parse(textBox11.Text));
+                
                 if (searchedSubject == null)
                 {
                     MessageBox.Show("No existe Materia");
                 }
                 else
                 {
+                    int a = Int32.Parse(textBox11.Text);
+                    searchedSubject = dbmanager.dbSubjects.First(t => t.codeId.Equals(a));
                     textBox12.Show(); textBox12.Text = searchedSubject.GetName();
                     SubjectStudentListBox.Items.Clear();
                     foreach (Student element in searchedSubject.GetStudents())
@@ -569,7 +641,7 @@ namespace Solucion2
         {
             if (searchedTeacher != null)
             {
-                mysystem.DeleteTeacher(searchedTeacher);
+                mysystem.DeleteTeacher(searchedTeacher); dbmanager.dbTeachers.Remove(searchedTeacher); dbmanager.SaveChanges();
                 searchedStudent = null;
 
             }
@@ -585,14 +657,16 @@ namespace Solucion2
             if (textBox7.Text != "")
             {
                 searchedTeacher = mysystem.searchTeacher(textBox7.Text);
+                
                 if (searchedTeacher == null)
                 {
                     MessageBox.Show("No existe Docente");
                 }
                 else
                 {
+                    string a = textBox7.Text;
+                    searchedTeacher = dbmanager.dbTeachers.First(t => t.surname.Equals(a));
                     textBox8.Show(); textBox8.Text = searchedTeacher.GetName();
-
                     TeacherSubjectsListBox.Items.Clear();
                     foreach (Subject element in searchedTeacher.GetSubjects())
                     {
@@ -635,6 +709,8 @@ namespace Solucion2
             {
                 searchedTeacher.EditTeacherName(textBox8.Text);
                 searchedTeacher.EditTeacherSurname(textBox7.Text);
+                dbmanager.ModifyTeacher(searchedTeacher);
+                updatedb();
             }
             else
             {
@@ -645,44 +721,53 @@ namespace Solucion2
 
         private void StudentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string myString = StudentListBox.SelectedItem.ToString();
-            string[] subStrings = myString.Split(' ');
-            searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
-            StudentSubjectsList.Items.Clear();
-            foreach (Subject element in searchedStudent.GetSubjects())
+            if (StudentListBox.SelectedItem != null)
             {
-                StudentSubjectsList.Items.Add(element.ToString());
-            }
+                string myString = StudentListBox.SelectedItem.ToString();
+                string[] subStrings = myString.Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
+                StudentSubjectsList.Items.Clear();
+                foreach (Subject element in searchedStudent.GetSubjects())
+                {
+                    StudentSubjectsList.Items.Add(element.ToString());
+                }
+            }            
         }
 
         private void SubjectListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            string myString = SubjectListBox.SelectedItem.ToString();
-            string[] subStrings = myString.Split(' ');
-            searchedSubject = mysystem.searchSubject(Int32.Parse(subStrings[0]));
-            SubjectEnrolledStudentsListBox.Items.Clear();
-            foreach (Student element in searchedSubject.GetStudents())
+
+            if (SubjectListBox.SelectedItem!=null)
             {
-                SubjectEnrolledStudentsListBox.Items.Add(element.ToString());
-            }
-            SubjectEnrolledTeachersListBox.Items.Clear();
-            foreach(Teacher element in searchedSubject.GetTeachers())
-            {
-                SubjectEnrolledTeachersListBox.Items.Add(element.ToString());
+                string myString = SubjectListBox.SelectedItem.ToString();
+                string[] subStrings = myString.Split(' ');
+                searchedSubject = mysystem.searchSubject(Int32.Parse(subStrings[0]));
+                SubjectEnrolledStudentsListBox.Items.Clear();
+                foreach (Student element in searchedSubject.GetStudents())
+                {
+                    SubjectEnrolledStudentsListBox.Items.Add(element.ToString());
+                }
+
+                SubjectEnrolledTeachersListBox.Items.Clear();
+                foreach (Teacher element in searchedSubject.GetTeachers())
+                {
+                    SubjectEnrolledTeachersListBox.Items.Add(element.ToString());
+                }
             }
         }
 
         private void TeacherListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            string myString = TeacherListBox.SelectedItem.ToString();
-            string[] subStrings = myString.Split(' ');
-            searchedTeacher= mysystem.searchTeacher(subStrings[1]);
-            TeacherSubjectslistBox1.Items.Clear();
-            foreach (Subject element in searchedTeacher.GetSubjects())
+            if (TeacherListBox.SelectedItem != null)
             {
-                TeacherSubjectslistBox1.Items.Add(element.ToString());
+                string myString = TeacherListBox.SelectedItem.ToString();
+                string[] subStrings = myString.Split(' ');
+                searchedTeacher = mysystem.searchTeacher(subStrings[1]);
+                TeacherSubjectslistBox1.Items.Clear();
+                foreach (Subject element in searchedTeacher.GetSubjects())
+                {
+                    TeacherSubjectslistBox1.Items.Add(element.ToString());
+                }
             }
         }
 
@@ -693,7 +778,7 @@ namespace Solucion2
             createdVan.EditVanId(Int32.Parse(textBox13.Text)); textBox13.Text = "";
             createdVan.EditVanName(textBox16.Text); textBox16.Text = "";
             createdVan.EditVanAvailability(VanAvailableCheckBox.Checked);
-            mysystem.showallvans().Add(createdVan);
+            mysystem.showallvans().Add(createdVan);dbmanager.dbVans.Add(createdVan);
             hideallgrouboxes();
         }
 
@@ -767,7 +852,7 @@ namespace Solucion2
         {
             if (searchedVan != null)
             {
-                mysystem.DeleteVan(searchedVan);
+                mysystem.DeleteVan(searchedVan); dbmanager.dbVans.Remove(searchedVan); dbmanager.SaveChanges();
                 searchedVan = null;
             }
             else
@@ -818,7 +903,7 @@ namespace Solucion2
             createdActivity.EditActivityId(Int32.Parse(textBox19.Text));
             createdActivity.EditActivityDate(dateTimePicker1.Value);
             createdActivity.EditActivityCost(Int32.Parse(textBox17.Text));
-            mysystem.showallactivities().Add(createdActivity);
+            mysystem.showallactivities().Add(createdActivity);dbmanager.dbActivities.Add(createdActivity);
             hideallgrouboxes();
         }
 
@@ -890,7 +975,7 @@ namespace Solucion2
         {
             if (searchedActivity != null)
             {
-                mysystem.DeleteActivity(searchedActivity);
+                mysystem.DeleteActivity(searchedActivity); dbmanager.dbActivities.Remove(searchedActivity); dbmanager.SaveChanges();
                 searchedActivity = null;
             }
             else
@@ -1033,22 +1118,26 @@ namespace Solucion2
             Teacher createdTeacher = new Teacher();
             createdTeacher.EditTeacherName(textBox8.Text); textBox8.Text = "";
             createdTeacher.EditTeacherSurname(textBox7.Text); textBox7.Text = "";
-            mysystem.showallteachers().Add(createdTeacher);
+            mysystem.showallteachers().Add(createdTeacher);dbmanager.dbTeachers.Add(createdTeacher); dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
 
         private void DBSave_Click(object sender, EventArgs e)
         {
-            Persistence dbmanager = new Persistence();
+            List<Van> aux = dbmanager.GetVans1(1);
             
             Student s1 = new Student();
-            if (!dbmanager.SaveStudent(s1))
-                MessageBox.Show("La base no esta disponible");
+            if (!dbmanager.SaveStudent(s1)) MessageBox.Show("La base no esta disponible");
             Teacher t1 = new Teacher { name ="Teacher2Name", surname= "Teacher2Surname" };
-            dbmanager.SaveTeacher(t1);
+            if (!dbmanager.SaveTeacher(t1)) MessageBox.Show("La base no esta disponible");
             Subject sub1=new Subject { name="Subject 3"};
-            //dbmanager.SaveSubject(sub1);
+            dbmanager.SaveSubject(sub1);
+
+            Exam e1 = new Exam {approval = 1, subject = sub1, date = DateTime.Now };
+            dbmanager.SaveExam(e1);
+
+
             Van element = new Van();
             dbmanager.SaveVan(element);
 
@@ -1139,7 +1228,7 @@ namespace Solucion2
                 searchedSubject = mysystem.searchSubject(Int32.Parse(subStrings1[0]));//substring1[0] 0 = subjectid
 
                 Exam examcreated = new Exam() { approval = Int32.Parse(ExamApprovalComboBox.SelectedItem.ToString()), date = ExamDatePicker.Value, subject = searchedSubject };
-                mysystem.allexams.Add(examcreated);
+                mysystem.allexams.Add(examcreated); dbmanager.dbExams.Add(examcreated); dbmanager.SaveChanges();
             }
             
             hideallgrouboxes();
@@ -1225,7 +1314,7 @@ namespace Solucion2
                 string[] subStrings2 = myStringStudent.Split(' ');
                 searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings2[2]));//substring2[2]= student number
 
-                searchedExam.ExamEnrollStudent(searchedStudent, 0);
+                searchedExam.ExamEnrollStudent(searchedStudent, 0);dbmanager.SaveChanges();//ToDb();
             }
             hideallgrouboxes();
             ExamSubjectEnrollListBox.Items.Clear();
@@ -1239,7 +1328,7 @@ namespace Solucion2
                 string myStringSubject = ExamsToDeleteListBox.SelectedItem.ToString();
                 string[] subStrings1 = myStringSubject.Split(' ');
                 searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
-                mysystem.allexams.Remove(searchedExam);
+                mysystem.allexams.Remove(searchedExam);dbmanager.dbExams.Remove(searchedExam);
             }
             hideallgrouboxes();
         }
