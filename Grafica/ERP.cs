@@ -1586,6 +1586,7 @@ namespace Solucion2
         private void btnPrintReport_Click(object sender, EventArgs e)
         {
 
+
             using (var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();
@@ -1593,9 +1594,12 @@ namespace Solucion2
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
-                    Bitmap printscreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                    //Bitmap printscreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                    Rectangle bounds = this.Bounds;
+                    Bitmap printscreen = new Bitmap(bounds.Width, bounds.Height);
+
                     Graphics graphics = Graphics.FromImage(printscreen as Image);
-                    graphics.CopyFromScreen(0, 0, 0, 0, printscreen.Size);
+                    graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
                     printscreen.Save(fbd.SelectedPath + @"\Reporte.jpg", ImageFormat.Jpeg);
                 }
             }
