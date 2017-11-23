@@ -98,6 +98,8 @@ namespace Solucion2
             ExamUnenrollGroupBox.Visible = false;
             ExamFilterGroupBox.Visible = false;
             ExamScoreGroupBox.Visible = false;
+            ActivityStudentsEnrollGroupBox.Visible = false;
+            ActivityStudentsUnEnrollGroupBox.Visible = false;
             btnSubjectSearch.Hide();
             btnSubjectSearchModify.Hide();
             btnSubjectSearchModify1.Hide();
@@ -209,6 +211,21 @@ namespace Solucion2
             {
                 ScoreExams.Items.Add(element.ToString());
             }
+            ActivitiesUnEnrollListBox.Items.Clear();
+            ActivitiesEnrollListBox.Items.Clear();
+            foreach(Activity element in mysystem.allactivities)
+            {
+                ActivitiesUnEnrollListBox.Items.Add(element.ToString());
+                ActivitiesEnrollListBox.Items.Add(element.ToString());
+            }
+            
+            ActivitiesStudentsEnrollListBox.Items.Clear();
+            foreach(Student element in mysystem.allstudents)
+            {
+                ActivitiesStudentsEnrollListBox.Items.Add(element.ToString());
+            }
+
+
 
             comboBox1.Items.Clear();
             ExamApprovalComboBox.Items.Clear();
@@ -376,6 +393,8 @@ namespace Solucion2
 
         private void button27_Click(object sender, EventArgs e)
         {
+            dbmanager.deleteParam("Parametro2");
+            dbmanager.Dispose();
             this.Close();
         }
 
@@ -563,7 +582,7 @@ namespace Solucion2
 
         private void empty()
         {
-            dbmanager.emptybase("Parametro");
+            dbmanager.emptybase("Parametro2");
             Student dummy = new Student();
             dbmanager.SaveStudent(dummy);
             dbmanager.DeleteStudent(dummy);
@@ -778,7 +797,7 @@ namespace Solucion2
             createdVan.EditVanId(Int32.Parse(textBox13.Text)); textBox13.Text = "";
             createdVan.EditVanName(textBox16.Text); textBox16.Text = "";
             createdVan.EditVanAvailability(VanAvailableCheckBox.Checked);
-            mysystem.showallvans().Add(createdVan);dbmanager.dbVans.Add(createdVan);
+            mysystem.showallvans().Add(createdVan);dbmanager.dbVans.Add(createdVan); dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
@@ -840,6 +859,8 @@ namespace Solucion2
                 searchedVan.EditVanCapacity(Int32.Parse(textBox14.Text)); textBox14.Text = "";
                 searchedVan.EditVanId(Int32.Parse(textBox13.Text)); textBox13.Text = "";
                 searchedVan.EditVanName(textBox16.Text); textBox16.Text = "";
+                dbmanager.ModifyVan(searchedVan);
+                updatedb();
             }
             else
             {
@@ -903,7 +924,7 @@ namespace Solucion2
             createdActivity.EditActivityId(Int32.Parse(textBox19.Text));
             createdActivity.EditActivityDate(dateTimePicker1.Value);
             createdActivity.EditActivityCost(Int32.Parse(textBox17.Text));
-            mysystem.showallactivities().Add(createdActivity);dbmanager.dbActivities.Add(createdActivity);
+            mysystem.showallactivities().Add(createdActivity);dbmanager.dbActivities.Add(createdActivity); dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
@@ -930,6 +951,8 @@ namespace Solucion2
                 searchedActivity.EditActivityId(Int32.Parse(textBox19.Text));
                 searchedActivity.EditActivityDate(dateTimePicker1.Value);
                 searchedActivity.EditActivityCost(Int32.Parse(textBox17.Text));
+                dbmanager.ModifyActivity(searchedActivity); dbmanager.SaveChanges();
+                updatedb();
             }
             else
             {
@@ -1153,8 +1176,28 @@ namespace Solucion2
 
         private void btnModifyDB_Click(object sender, EventArgs e)
         {
-            Van VanToSave = new Van { name = "nameA", capacity = 11, available = true };
-            Persistence dbmanager = new Persistence();
+
+            Fee feeToSave = new Fee() { month=1,year=2017,paid=true};
+            dbmanager.SaveFee(feeToSave);
+            feeToSave.month = 1;
+            feeToSave.year = 3;
+            feeToSave.paid = false;
+            dbmanager.ModifyFee(feeToSave);
+            dbmanager.dbFees.Remove(feeToSave);dbmanager.SaveChanges();
+            Activity activityToSave = new Activity() { cost = 1, date = DateTime.Now, id = 1, name = "A1", paid = true };
+            dbmanager.SaveActivity(activityToSave);
+            activityToSave.cost = 2;
+            activityToSave.date = DateTime.MaxValue;
+            activityToSave.id = 2;
+            activityToSave.name = "A2";
+            activityToSave.paid = false;
+            dbmanager.ModifyActivity(activityToSave);
+            dbmanager.dbActivities.Remove(activityToSave);dbmanager.SaveChanges();
+
+
+
+            Van VanToSave = new Van { name = "nameA", capacity = 11, available = true,eficiency=0 };
+
             dbmanager.SaveVan(VanToSave);
             VanToSave.available = false;
             VanToSave.capacity = 10;
@@ -1178,12 +1221,7 @@ namespace Solucion2
             dbmanager.SaveSubject(subjectToSave);
             subjectToSave.name = "S2";
             dbmanager.ModifySubject(subjectToSave);
-            Fee feeToSave = new Fee();
-            dbmanager.SaveFee(feeToSave);
-            feeToSave.month = 1;
-            feeToSave.year = 3;
-            dbmanager.ModifyFee(feeToSave);
-
+            
 
 
             MessageBox.Show("MODIFICADO OK");
@@ -1434,6 +1472,78 @@ namespace Solucion2
                 string[] subStrings = ScoreStudentsEnrolled.SelectedItem.ToString().Split(' ');
                 searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
                 searchedExam.qualify(searchedStudent, Int32.Parse(ScoreComboBox.SelectedItem.ToString()));
+            }
+        }
+
+        private void btnActivityEnroll_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ActivityStudentsEnrollGroupBox.Visible = true;
+            ActivityStudentsEnrollGroupBox.Location = DefaultPanelLocation;
+            refreshdata();
+        }
+
+        private void btnActivityUnEnroll_Click(object sender, EventArgs e)
+        {
+            hideallgrouboxes();
+            ActivityStudentsUnEnrollGroupBox.Visible = true;
+            ActivityStudentsUnEnrollGroupBox.Location = DefaultPanelLocation;
+            refreshdata();
+        }
+
+        private void btnActivityEnrollStudent_Click(object sender, EventArgs e)
+        {
+            if ((ActivitiesEnrollListBox.SelectedItem != null) && (ActivitiesStudentsEnrollListBox.SelectedItem != null))
+            {
+
+                string[] s1 = ActivitiesEnrollListBox.SelectedItem.ToString().Split(' ');
+                searchedActivity = mysystem.searchActivity(Int32.Parse(s1[1]));
+
+                string[] s2 = ActivitiesStudentsEnrollListBox.SelectedItem.ToString().Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(s2[2]));
+                
+                searchedActivity.paid = true;
+                searchedActivity.students.Add(searchedStudent);
+                searchedStudent.payments.Add(searchedActivity);
+                dbmanager.ModifyStudent(searchedStudent);
+                dbmanager.ModifyActivity(searchedActivity);
+                dbmanager.SaveChanges();
+                hideallgrouboxes();
+            }
+        }
+
+        private void ActivitiesUnEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ActivitiesUnEnrollListBox.SelectedItem != null)
+            {
+                string[] subStrings = ActivitiesUnEnrollListBox.SelectedItem.ToString().Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[1]));
+                ActivitiesStudentsUnEnrollListBox.Items.Clear();
+                foreach (Student element in searchedActivity.students)
+                {
+                    ActivitiesStudentsUnEnrollListBox.Items.Add(element.ToString());
+                }
+            }
+        }
+
+        private void btnActivityUnEnrollStudent_Click(object sender, EventArgs e)
+        {
+            if ((ActivitiesUnEnrollListBox.SelectedItem != null) && (ActivitiesStudentsUnEnrollListBox.SelectedItem != null))
+            {
+
+                string[] s1 = ActivitiesUnEnrollListBox.SelectedItem.ToString().Split(' ');
+                searchedActivity = mysystem.searchActivity(Int32.Parse(s1[1]));
+
+                string[] s2 = ActivitiesStudentsUnEnrollListBox.SelectedItem.ToString().Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(s2[2]));
+
+                searchedActivity.paid = true;
+                searchedActivity.students.Remove(searchedStudent);
+                searchedStudent.payments.Remove(searchedActivity);
+                dbmanager.ModifyStudent(searchedStudent);
+                dbmanager.ModifyActivity(searchedActivity);
+                dbmanager.SaveChanges();
+                hideallgrouboxes();
             }
         }
     }

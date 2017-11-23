@@ -58,6 +58,8 @@
             this.btnAvailableVans = new System.Windows.Forms.Button();
             this.btnVanDelete = new System.Windows.Forms.Button();
             this.ActivityGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnActivityUnEnroll = new System.Windows.Forms.Button();
+            this.btnActivityEnroll = new System.Windows.Forms.Button();
             this.btnCreateActivity = new System.Windows.Forms.Button();
             this.btnModifyActivity = new System.Windows.Forms.Button();
             this.btnActivityStudents = new System.Windows.Forms.Button();
@@ -232,6 +234,18 @@
             this.btnScoreExam = new System.Windows.Forms.Button();
             this.ScoreStudentsEnrolled = new System.Windows.Forms.ListBox();
             this.ScoreExams = new System.Windows.Forms.ListBox();
+            this.ActivityStudentsEnrollGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnActivityEnrollStudent = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.ActivitiesEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ActivitiesStudentsEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ActivityStudentsUnEnrollGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnActivityUnEnrollStudent = new System.Windows.Forms.Button();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.ActivitiesUnEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ActivitiesStudentsUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -260,6 +274,8 @@
             this.ExamUnenrollGroupBox.SuspendLayout();
             this.ExamFilterGroupBox.SuspendLayout();
             this.ExamScoreGroupBox.SuspendLayout();
+            this.ActivityStudentsEnrollGroupBox.SuspendLayout();
+            this.ActivityStudentsUnEnrollGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPayments
@@ -573,22 +589,44 @@
             // 
             // ActivityGroupBox
             // 
+            this.ActivityGroupBox.Controls.Add(this.btnActivityUnEnroll);
+            this.ActivityGroupBox.Controls.Add(this.btnActivityEnroll);
             this.ActivityGroupBox.Controls.Add(this.btnCreateActivity);
             this.ActivityGroupBox.Controls.Add(this.btnModifyActivity);
             this.ActivityGroupBox.Controls.Add(this.btnActivityStudents);
             this.ActivityGroupBox.Controls.Add(this.btnDeleteActivity);
             this.ActivityGroupBox.Location = new System.Drawing.Point(191, 188);
             this.ActivityGroupBox.Name = "ActivityGroupBox";
-            this.ActivityGroupBox.Size = new System.Drawing.Size(173, 82);
+            this.ActivityGroupBox.Size = new System.Drawing.Size(220, 111);
             this.ActivityGroupBox.TabIndex = 22;
             this.ActivityGroupBox.TabStop = false;
             this.ActivityGroupBox.Text = "Actividades";
+            // 
+            // btnActivityUnEnroll
+            // 
+            this.btnActivityUnEnroll.Location = new System.Drawing.Point(110, 77);
+            this.btnActivityUnEnroll.Name = "btnActivityUnEnroll";
+            this.btnActivityUnEnroll.Size = new System.Drawing.Size(98, 23);
+            this.btnActivityUnEnroll.TabIndex = 17;
+            this.btnActivityUnEnroll.Text = "Baja Inscripción";
+            this.btnActivityUnEnroll.UseVisualStyleBackColor = true;
+            this.btnActivityUnEnroll.Click += new System.EventHandler(this.btnActivityUnEnroll_Click);
+            // 
+            // btnActivityEnroll
+            // 
+            this.btnActivityEnroll.Location = new System.Drawing.Point(6, 77);
+            this.btnActivityEnroll.Name = "btnActivityEnroll";
+            this.btnActivityEnroll.Size = new System.Drawing.Size(98, 23);
+            this.btnActivityEnroll.TabIndex = 16;
+            this.btnActivityEnroll.Text = "Alta Inscripción";
+            this.btnActivityEnroll.UseVisualStyleBackColor = true;
+            this.btnActivityEnroll.Click += new System.EventHandler(this.btnActivityEnroll_Click);
             // 
             // btnCreateActivity
             // 
             this.btnCreateActivity.Location = new System.Drawing.Point(6, 19);
             this.btnCreateActivity.Name = "btnCreateActivity";
-            this.btnCreateActivity.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateActivity.Size = new System.Drawing.Size(98, 23);
             this.btnCreateActivity.TabIndex = 12;
             this.btnCreateActivity.Text = "Alta";
             this.btnCreateActivity.UseVisualStyleBackColor = true;
@@ -598,7 +636,7 @@
             // 
             this.btnModifyActivity.Location = new System.Drawing.Point(6, 48);
             this.btnModifyActivity.Name = "btnModifyActivity";
-            this.btnModifyActivity.Size = new System.Drawing.Size(75, 23);
+            this.btnModifyActivity.Size = new System.Drawing.Size(98, 23);
             this.btnModifyActivity.TabIndex = 14;
             this.btnModifyActivity.Text = "Modificar";
             this.btnModifyActivity.UseVisualStyleBackColor = true;
@@ -606,9 +644,9 @@
             // 
             // btnActivityStudents
             // 
-            this.btnActivityStudents.Location = new System.Drawing.Point(87, 48);
+            this.btnActivityStudents.Location = new System.Drawing.Point(110, 48);
             this.btnActivityStudents.Name = "btnActivityStudents";
-            this.btnActivityStudents.Size = new System.Drawing.Size(75, 23);
+            this.btnActivityStudents.Size = new System.Drawing.Size(98, 23);
             this.btnActivityStudents.TabIndex = 15;
             this.btnActivityStudents.Text = "Alumnos";
             this.btnActivityStudents.UseVisualStyleBackColor = true;
@@ -616,9 +654,9 @@
             // 
             // btnDeleteActivity
             // 
-            this.btnDeleteActivity.Location = new System.Drawing.Point(87, 19);
+            this.btnDeleteActivity.Location = new System.Drawing.Point(110, 19);
             this.btnDeleteActivity.Name = "btnDeleteActivity";
-            this.btnDeleteActivity.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteActivity.Size = new System.Drawing.Size(98, 23);
             this.btnDeleteActivity.TabIndex = 13;
             this.btnDeleteActivity.Text = "Baja";
             this.btnDeleteActivity.UseVisualStyleBackColor = true;
@@ -1633,7 +1671,7 @@
             this.ActivityStudentsGroupBox.Controls.Add(this.label27);
             this.ActivityStudentsGroupBox.Controls.Add(this.ActivityListBox);
             this.ActivityStudentsGroupBox.Controls.Add(this.ActivityStudentsListBox);
-            this.ActivityStudentsGroupBox.Location = new System.Drawing.Point(825, 349);
+            this.ActivityStudentsGroupBox.Location = new System.Drawing.Point(825, 347);
             this.ActivityStudentsGroupBox.Name = "ActivityStudentsGroupBox";
             this.ActivityStudentsGroupBox.Size = new System.Drawing.Size(160, 170);
             this.ActivityStudentsGroupBox.TabIndex = 31;
@@ -2283,11 +2321,129 @@
             this.ScoreExams.TabIndex = 0;
             this.ScoreExams.SelectedIndexChanged += new System.EventHandler(this.ScoreExams_SelectedIndexChanged);
             // 
+            // ActivityStudentsEnrollGroupBox
+            // 
+            this.ActivityStudentsEnrollGroupBox.Controls.Add(this.btnActivityEnrollStudent);
+            this.ActivityStudentsEnrollGroupBox.Controls.Add(this.label38);
+            this.ActivityStudentsEnrollGroupBox.Controls.Add(this.label39);
+            this.ActivityStudentsEnrollGroupBox.Controls.Add(this.ActivitiesEnrollListBox);
+            this.ActivityStudentsEnrollGroupBox.Controls.Add(this.ActivitiesStudentsEnrollListBox);
+            this.ActivityStudentsEnrollGroupBox.Location = new System.Drawing.Point(998, 349);
+            this.ActivityStudentsEnrollGroupBox.Name = "ActivityStudentsEnrollGroupBox";
+            this.ActivityStudentsEnrollGroupBox.Size = new System.Drawing.Size(160, 186);
+            this.ActivityStudentsEnrollGroupBox.TabIndex = 38;
+            this.ActivityStudentsEnrollGroupBox.TabStop = false;
+            this.ActivityStudentsEnrollGroupBox.Text = "Alta Inscripción";
+            // 
+            // btnActivityEnrollStudent
+            // 
+            this.btnActivityEnrollStudent.Location = new System.Drawing.Point(69, 154);
+            this.btnActivityEnrollStudent.Name = "btnActivityEnrollStudent";
+            this.btnActivityEnrollStudent.Size = new System.Drawing.Size(75, 23);
+            this.btnActivityEnrollStudent.TabIndex = 22;
+            this.btnActivityEnrollStudent.Text = "Inscribir";
+            this.btnActivityEnrollStudent.UseVisualStyleBackColor = true;
+            this.btnActivityEnrollStudent.Click += new System.EventHandler(this.btnActivityEnrollStudent_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(6, 16);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(51, 13);
+            this.label38.TabIndex = 21;
+            this.label38.Text = "Actividad";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(78, 16);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(47, 13);
+            this.label39.TabIndex = 20;
+            this.label39.Text = "Alumnos";
+            // 
+            // ActivitiesEnrollListBox
+            // 
+            this.ActivitiesEnrollListBox.FormattingEnabled = true;
+            this.ActivitiesEnrollListBox.Location = new System.Drawing.Point(7, 29);
+            this.ActivitiesEnrollListBox.Name = "ActivitiesEnrollListBox";
+            this.ActivitiesEnrollListBox.Size = new System.Drawing.Size(65, 121);
+            this.ActivitiesEnrollListBox.TabIndex = 1;
+            // 
+            // ActivitiesStudentsEnrollListBox
+            // 
+            this.ActivitiesStudentsEnrollListBox.FormattingEnabled = true;
+            this.ActivitiesStudentsEnrollListBox.Location = new System.Drawing.Point(78, 29);
+            this.ActivitiesStudentsEnrollListBox.Name = "ActivitiesStudentsEnrollListBox";
+            this.ActivitiesStudentsEnrollListBox.Size = new System.Drawing.Size(65, 121);
+            this.ActivitiesStudentsEnrollListBox.TabIndex = 0;
+            // 
+            // ActivityStudentsUnEnrollGroupBox
+            // 
+            this.ActivityStudentsUnEnrollGroupBox.Controls.Add(this.btnActivityUnEnrollStudent);
+            this.ActivityStudentsUnEnrollGroupBox.Controls.Add(this.label40);
+            this.ActivityStudentsUnEnrollGroupBox.Controls.Add(this.label41);
+            this.ActivityStudentsUnEnrollGroupBox.Controls.Add(this.ActivitiesUnEnrollListBox);
+            this.ActivityStudentsUnEnrollGroupBox.Controls.Add(this.ActivitiesStudentsUnEnrollListBox);
+            this.ActivityStudentsUnEnrollGroupBox.Location = new System.Drawing.Point(998, 541);
+            this.ActivityStudentsUnEnrollGroupBox.Name = "ActivityStudentsUnEnrollGroupBox";
+            this.ActivityStudentsUnEnrollGroupBox.Size = new System.Drawing.Size(160, 186);
+            this.ActivityStudentsUnEnrollGroupBox.TabIndex = 39;
+            this.ActivityStudentsUnEnrollGroupBox.TabStop = false;
+            this.ActivityStudentsUnEnrollGroupBox.Text = "Baja Inscripción";
+            // 
+            // btnActivityUnEnrollStudent
+            // 
+            this.btnActivityUnEnrollStudent.Location = new System.Drawing.Point(69, 154);
+            this.btnActivityUnEnrollStudent.Name = "btnActivityUnEnrollStudent";
+            this.btnActivityUnEnrollStudent.Size = new System.Drawing.Size(75, 23);
+            this.btnActivityUnEnrollStudent.TabIndex = 22;
+            this.btnActivityUnEnrollStudent.Text = "Borrar";
+            this.btnActivityUnEnrollStudent.UseVisualStyleBackColor = true;
+            this.btnActivityUnEnrollStudent.Click += new System.EventHandler(this.btnActivityUnEnrollStudent_Click);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(6, 16);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(51, 13);
+            this.label40.TabIndex = 21;
+            this.label40.Text = "Actividad";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(78, 16);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(47, 13);
+            this.label41.TabIndex = 20;
+            this.label41.Text = "Alumnos";
+            // 
+            // ActivitiesUnEnrollListBox
+            // 
+            this.ActivitiesUnEnrollListBox.FormattingEnabled = true;
+            this.ActivitiesUnEnrollListBox.Location = new System.Drawing.Point(7, 29);
+            this.ActivitiesUnEnrollListBox.Name = "ActivitiesUnEnrollListBox";
+            this.ActivitiesUnEnrollListBox.Size = new System.Drawing.Size(65, 121);
+            this.ActivitiesUnEnrollListBox.TabIndex = 1;
+            this.ActivitiesUnEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ActivitiesUnEnrollListBox_SelectedIndexChanged);
+            // 
+            // ActivitiesStudentsUnEnrollListBox
+            // 
+            this.ActivitiesStudentsUnEnrollListBox.FormattingEnabled = true;
+            this.ActivitiesStudentsUnEnrollListBox.Location = new System.Drawing.Point(78, 29);
+            this.ActivitiesStudentsUnEnrollListBox.Name = "ActivitiesStudentsUnEnrollListBox";
+            this.ActivitiesStudentsUnEnrollListBox.Size = new System.Drawing.Size(65, 121);
+            this.ActivitiesStudentsUnEnrollListBox.TabIndex = 0;
+            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.ActivityStudentsUnEnrollGroupBox);
             this.Controls.Add(this.StudentModifyGroupBox);
             this.Controls.Add(this.ExamScoreGroupBox);
             this.Controls.Add(this.ExamFilterGroupBox);
@@ -2295,7 +2451,6 @@
             this.Controls.Add(this.ExamEnrollGroupBox);
             this.Controls.Add(this.ExamDeleteGroupBox);
             this.Controls.Add(this.ExamCreateGroupBox);
-            this.Controls.Add(this.ExamsGroupBox);
             this.Controls.Add(this.ModulesGroupBox);
             this.Controls.Add(this.StudentPaymentListGroupBox);
             this.Controls.Add(this.StudentGroupBox);
@@ -2319,6 +2474,8 @@
             this.Controls.Add(this.ActivityGroupBox);
             this.Controls.Add(this.PaymentGroupBox);
             this.Controls.Add(this.SubjectGroupBox);
+            this.Controls.Add(this.ExamsGroupBox);
+            this.Controls.Add(this.ActivityStudentsEnrollGroupBox);
             this.Name = "ERP";
             this.Text = "ERP";
             this.ModulesGroupBox.ResumeLayout(false);
@@ -2364,6 +2521,10 @@
             this.ExamFilterGroupBox.PerformLayout();
             this.ExamScoreGroupBox.ResumeLayout(false);
             this.ExamScoreGroupBox.PerformLayout();
+            this.ActivityStudentsEnrollGroupBox.ResumeLayout(false);
+            this.ActivityStudentsEnrollGroupBox.PerformLayout();
+            this.ActivityStudentsUnEnrollGroupBox.ResumeLayout(false);
+            this.ActivityStudentsUnEnrollGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2574,5 +2735,19 @@
         private System.Windows.Forms.Button btnScoreExam;
         private System.Windows.Forms.ListBox ScoreStudentsEnrolled;
         private System.Windows.Forms.ListBox ScoreExams;
+        private System.Windows.Forms.Button btnActivityUnEnroll;
+        private System.Windows.Forms.Button btnActivityEnroll;
+        private System.Windows.Forms.GroupBox ActivityStudentsEnrollGroupBox;
+        private System.Windows.Forms.Button btnActivityEnrollStudent;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.ListBox ActivitiesEnrollListBox;
+        private System.Windows.Forms.ListBox ActivitiesStudentsEnrollListBox;
+        private System.Windows.Forms.GroupBox ActivityStudentsUnEnrollGroupBox;
+        private System.Windows.Forms.Button btnActivityUnEnrollStudent;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ListBox ActivitiesUnEnrollListBox;
+        private System.Windows.Forms.ListBox ActivitiesStudentsUnEnrollListBox;
     }
 }
