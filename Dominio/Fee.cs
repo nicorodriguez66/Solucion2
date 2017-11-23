@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Fee:Payment
+    public class Fee:Payment, IEquatable<Fee>
+
     {
-        
+
         public int month { set; get; }
         public int year { set; get; }
         public Fee()
@@ -36,5 +37,9 @@ namespace Dominio
             return this.month + "/" + this.year;
         }
 
+        public bool Equals(Fee other)
+        {
+            return ((this.month== other.month) && (this.year == other.year));
+        }
     }
 }

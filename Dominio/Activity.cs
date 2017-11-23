@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Activity : Payment
+    public class Activity : Payment, IEquatable<Activity>
     {
         public string name { get; set; }
         public int id { get; set; }
@@ -76,6 +76,9 @@ namespace Dominio
             }
         }
 
-
+        public bool Equals(Activity other)
+        {
+            return this.payId==other.payId;
+        }
     }
 }

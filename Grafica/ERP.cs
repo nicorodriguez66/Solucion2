@@ -228,18 +228,29 @@ namespace Solucion2
                 ActivitiesStudentsEnrollListBox.Items.Add(element.ToString());
             }
 
+            FeeStudentListBox.Items.Clear();
+            foreach (Student element in mysystem.allstudents)
+            {
+                FeeStudentListBox.Items.Add(element);
+            }
 
 
-            comboBox1.Items.Clear();
+            FeeYearComboBox.Items.Clear();
+            for (int i = 1900; i <= DateTime.Now.Year; i++)
+            {
+                FeeYearComboBox.Items.Add(i.ToString());
+            }
+
+            FeeMonthComboBox.Items.Clear();
             ExamApprovalComboBox.Items.Clear();
             ScoreComboBox.Items.Clear();
             for (int i = 1; i <= 12; i++)
             {
-                comboBox1.Items.Add(i.ToString());
+                FeeMonthComboBox.Items.Add(i.ToString());
                 ExamApprovalComboBox.Items.Add(i.ToString());
                 ScoreComboBox.Items.Add(i.ToString());
             }
-    }
+        }
 
         private void BtnStudents_Click(object sender, EventArgs e)
         {
@@ -324,6 +335,10 @@ namespace Solucion2
             hideallgrouboxes();
             PaymentGroupBox.Visible = true;
             PaymentGroupBox.Location = DefaultPanelLocation;
+
+            btnModifyPayment.Visible = false;
+            btnDeletePayment.Visible = false;
+            btnListPayment.Visible = false;
         }
 
         
@@ -1053,10 +1068,10 @@ namespace Solucion2
             PaymentCreateGroupBox.Visible = true;
             PaymentCreateGroupBox.Location = DefaultPanelLocation;
             PaymentCreateGroupBox.Text = "Alta Pago";
-            textBox9.Show();
-            comboBox1.Show();
-            textBox5.Show();
-
+            FeeYearComboBox.Show();
+            FeeMonthComboBox.Show();
+            FeeCostTextBox.Show();
+            refreshdata();
             btnCreateNewPayment.Show();
         }
 
@@ -1067,9 +1082,9 @@ namespace Solucion2
             PaymentCreateGroupBox.Location = DefaultPanelLocation;
             PaymentCreateGroupBox.Text = "Baja Pago";
 
-            textBox9.Hide();
-            comboBox1.Hide();
-            textBox5.Hide();
+            FeeYearComboBox.Hide();
+            FeeMonthComboBox.Hide();
+            FeeCostTextBox.Hide();
 
             btnPaymentSearchDelete.Show();
         }
@@ -1081,9 +1096,9 @@ namespace Solucion2
             PaymentCreateGroupBox.Location = DefaultPanelLocation;
             PaymentCreateGroupBox.Text = "Modificar Pago";
 
-            textBox9.Hide();
-            comboBox1.Hide();
-            textBox5.Hide();
+            FeeYearComboBox.Hide();
+            FeeMonthComboBox.Hide();
+            FeeCostTextBox.Hide();
 
             btnPaymentSearchModify.Show();
         }
@@ -1567,10 +1582,7 @@ namespace Solucion2
             }
         }
 
-        private void ExamSubjectEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void btnSubjectReport_Click(object sender, EventArgs e)
         {
@@ -1601,6 +1613,47 @@ namespace Solucion2
                     Graphics graphics = Graphics.FromImage(printscreen as Image);
                     graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
                     printscreen.Save(fbd.SelectedPath + @"\Reporte.jpg", ImageFormat.Jpeg);
+                }
+            }
+        }
+
+        private void btnCreateNewPayment_Click(object sender, EventArgs e)
+        {
+            if ((FeeMonthComboBox.SelectedItem != null) && (FeeYearComboBox.SelectedItem != null)&& (FeeStudentListBox.SelectedItem!=null))
+            {
+                int onemonth = Int32.Parse(FeeMonthComboBox.SelectedItem.ToString());
+                int oneyear = Int32.Parse(FeeYearComboBox.SelectedItem.ToString());
+                int onecost = Int32.Parse(FeeCostTextBox.Text);
+
+                Fee createdFee = new Fee() { month = onemonth, year = oneyear };
+
+                string[] subStrings = FeeStudentListBox.Text.Split(' ');
+                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
+
+                bool pago = false;
+                foreach (Payment p in searchedStudent.payments)
+                {
+                    string a = p.GetType().ToString();
+                    if (p.GetType().ToString().Equals("Dominio.Fee"))
+                    {
+                        Fee f = (Fee)p;
+                        if ((f.Equals(createdFee))&&(f.paid=true))
+                        {
+                            pago = true;
+                        }
+                    }        
+                }
+                if (!pago)
+                {
+                    createdFee.paid = true;
+                    searchedStudent.payments.Add(createdFee);
+                    dbmanager.SaveFee(createdFee); dbmanager.SaveChanges(); updatedb();
+                    MessageBox.Show("Cuota pagada satisfactoriamente");
+                    hideallgrouboxes();
+                }
+                else
+                {
+                    MessageBox.Show("Esta cuota ya fue pagada. Seleccione otra para pagar");
                 }
             }
         }

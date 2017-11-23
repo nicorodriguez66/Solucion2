@@ -43,6 +43,7 @@
             this.StudentGroupBox = new System.Windows.Forms.GroupBox();
             this.btnStudentPayments = new System.Windows.Forms.Button();
             this.SubjectGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnSubjectReport = new System.Windows.Forms.Button();
             this.btnCreateSubject = new System.Windows.Forms.Button();
             this.btnSubjectModify = new System.Windows.Forms.Button();
             this.btnSubjectList = new System.Windows.Forms.Button();
@@ -173,16 +174,17 @@
             this.ActivityListBox = new System.Windows.Forms.ListBox();
             this.ActivityStudentsListBox = new System.Windows.Forms.ListBox();
             this.PaymentCreateGroupBox = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.FeeYearComboBox = new System.Windows.Forms.ComboBox();
+            this.FeeStudentListBox = new System.Windows.Forms.ListBox();
+            this.FeeMonthComboBox = new System.Windows.Forms.ComboBox();
             this.btnDeletePayment1 = new System.Windows.Forms.Button();
             this.btnPaymentSearchModify = new System.Windows.Forms.Button();
             this.btnPaymentSearchDelete = new System.Windows.Forms.Button();
             this.btnModifyPayment1 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.FeeCostTextBox = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.btnCreateNewPayment = new System.Windows.Forms.Button();
             this.DBSave = new System.Windows.Forms.Button();
             this.btnModifyDB = new System.Windows.Forms.Button();
@@ -220,6 +222,7 @@
             this.ExamSubjectUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ExamStudentUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ExamFilterGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExamFilterStudentListBox = new System.Windows.Forms.ListBox();
             this.FilterDatePickerTo = new System.Windows.Forms.DateTimePicker();
             this.FilterDatePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.FilterSubjectCheckBox = new System.Windows.Forms.CheckBox();
@@ -246,9 +249,9 @@
             this.label41 = new System.Windows.Forms.Label();
             this.ActivitiesUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ActivitiesStudentsUnEnrollListBox = new System.Windows.Forms.ListBox();
-            this.ExamFilterStudentListBox = new System.Windows.Forms.ListBox();
-            this.btnSubjectReport = new System.Windows.Forms.Button();
             this.SubjectReportGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnPrintReport = new System.Windows.Forms.Button();
+            this.listBox5 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
@@ -257,8 +260,6 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.btnPrintReport = new System.Windows.Forms.Button();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -455,6 +456,16 @@
             this.SubjectGroupBox.TabIndex = 19;
             this.SubjectGroupBox.TabStop = false;
             this.SubjectGroupBox.Text = "Materias";
+            // 
+            // btnSubjectReport
+            // 
+            this.btnSubjectReport.Location = new System.Drawing.Point(87, 77);
+            this.btnSubjectReport.Name = "btnSubjectReport";
+            this.btnSubjectReport.Size = new System.Drawing.Size(75, 23);
+            this.btnSubjectReport.TabIndex = 16;
+            this.btnSubjectReport.Text = "Reporte";
+            this.btnSubjectReport.UseVisualStyleBackColor = true;
+            this.btnSubjectReport.Click += new System.EventHandler(this.btnSubjectReport_Click);
             // 
             // btnCreateSubject
             // 
@@ -683,7 +694,7 @@
             this.PaymentGroupBox.Controls.Add(this.btnModifyPayment);
             this.PaymentGroupBox.Controls.Add(this.btnListPayment);
             this.PaymentGroupBox.Controls.Add(this.btnDeletePayment);
-            this.PaymentGroupBox.Location = new System.Drawing.Point(191, 276);
+            this.PaymentGroupBox.Location = new System.Drawing.Point(210, 311);
             this.PaymentGroupBox.Name = "PaymentGroupBox";
             this.PaymentGroupBox.Size = new System.Drawing.Size(173, 82);
             this.PaymentGroupBox.TabIndex = 23;
@@ -696,7 +707,7 @@
             this.btnCreatePayment.Name = "btnCreatePayment";
             this.btnCreatePayment.Size = new System.Drawing.Size(75, 23);
             this.btnCreatePayment.TabIndex = 12;
-            this.btnCreatePayment.Text = "Alta";
+            this.btnCreatePayment.Text = "Pagar Cuota";
             this.btnCreatePayment.UseVisualStyleBackColor = true;
             this.btnCreatePayment.Click += new System.EventHandler(this.btnCreatePayment_Click);
             // 
@@ -1730,31 +1741,48 @@
             // 
             // PaymentCreateGroupBox
             // 
-            this.PaymentCreateGroupBox.Controls.Add(this.comboBox1);
+            this.PaymentCreateGroupBox.Controls.Add(this.FeeYearComboBox);
+            this.PaymentCreateGroupBox.Controls.Add(this.FeeStudentListBox);
+            this.PaymentCreateGroupBox.Controls.Add(this.FeeMonthComboBox);
             this.PaymentCreateGroupBox.Controls.Add(this.btnDeletePayment1);
             this.PaymentCreateGroupBox.Controls.Add(this.btnPaymentSearchModify);
             this.PaymentCreateGroupBox.Controls.Add(this.btnPaymentSearchDelete);
             this.PaymentCreateGroupBox.Controls.Add(this.btnModifyPayment1);
-            this.PaymentCreateGroupBox.Controls.Add(this.textBox5);
+            this.PaymentCreateGroupBox.Controls.Add(this.FeeCostTextBox);
             this.PaymentCreateGroupBox.Controls.Add(this.label29);
             this.PaymentCreateGroupBox.Controls.Add(this.label31);
             this.PaymentCreateGroupBox.Controls.Add(this.label32);
-            this.PaymentCreateGroupBox.Controls.Add(this.textBox9);
             this.PaymentCreateGroupBox.Controls.Add(this.btnCreateNewPayment);
             this.PaymentCreateGroupBox.Location = new System.Drawing.Point(540, 409);
             this.PaymentCreateGroupBox.Name = "PaymentCreateGroupBox";
-            this.PaymentCreateGroupBox.Size = new System.Drawing.Size(205, 170);
+            this.PaymentCreateGroupBox.Size = new System.Drawing.Size(318, 170);
             this.PaymentCreateGroupBox.TabIndex = 32;
             this.PaymentCreateGroupBox.TabStop = false;
             this.PaymentCreateGroupBox.Text = "Alta Pago";
             // 
-            // comboBox1
+            // FeeYearComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(64, 59);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(130, 21);
-            this.comboBox1.TabIndex = 30;
+            this.FeeYearComboBox.FormattingEnabled = true;
+            this.FeeYearComboBox.Location = new System.Drawing.Point(65, 33);
+            this.FeeYearComboBox.Name = "FeeYearComboBox";
+            this.FeeYearComboBox.Size = new System.Drawing.Size(130, 21);
+            this.FeeYearComboBox.TabIndex = 32;
+            // 
+            // FeeStudentListBox
+            // 
+            this.FeeStudentListBox.FormattingEnabled = true;
+            this.FeeStudentListBox.Location = new System.Drawing.Point(200, 33);
+            this.FeeStudentListBox.Name = "FeeStudentListBox";
+            this.FeeStudentListBox.Size = new System.Drawing.Size(112, 69);
+            this.FeeStudentListBox.TabIndex = 31;
+            // 
+            // FeeMonthComboBox
+            // 
+            this.FeeMonthComboBox.FormattingEnabled = true;
+            this.FeeMonthComboBox.Location = new System.Drawing.Point(64, 59);
+            this.FeeMonthComboBox.Name = "FeeMonthComboBox";
+            this.FeeMonthComboBox.Size = new System.Drawing.Size(130, 21);
+            this.FeeMonthComboBox.TabIndex = 30;
             // 
             // btnDeletePayment1
             // 
@@ -1794,12 +1822,12 @@
             this.btnModifyPayment1.UseVisualStyleBackColor = true;
             this.btnModifyPayment1.Click += new System.EventHandler(this.btnModifyPayment1_Click);
             // 
-            // textBox5
+            // FeeCostTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(64, 88);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(130, 20);
-            this.textBox5.TabIndex = 23;
+            this.FeeCostTextBox.Location = new System.Drawing.Point(64, 88);
+            this.FeeCostTextBox.Name = "FeeCostTextBox";
+            this.FeeCostTextBox.Size = new System.Drawing.Size(130, 20);
+            this.FeeCostTextBox.TabIndex = 23;
             // 
             // label29
             // 
@@ -1828,13 +1856,6 @@
             this.label32.TabIndex = 19;
             this.label32.Text = "Year";
             // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(64, 33);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(130, 20);
-            this.textBox9.TabIndex = 16;
-            // 
             // btnCreateNewPayment
             // 
             this.btnCreateNewPayment.Location = new System.Drawing.Point(64, 141);
@@ -1843,6 +1864,7 @@
             this.btnCreateNewPayment.TabIndex = 24;
             this.btnCreateNewPayment.Text = "Crear";
             this.btnCreateNewPayment.UseVisualStyleBackColor = true;
+            this.btnCreateNewPayment.Click += new System.EventHandler(this.btnCreateNewPayment_Click);
             // 
             // DBSave
             // 
@@ -2150,7 +2172,6 @@
             this.ExamSubjectEnrollListBox.Name = "ExamSubjectEnrollListBox";
             this.ExamSubjectEnrollListBox.Size = new System.Drawing.Size(94, 108);
             this.ExamSubjectEnrollListBox.TabIndex = 0;
-            this.ExamSubjectEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamSubjectEnrollListBox_SelectedIndexChanged);
             // 
             // ExamUnenrollGroupBox
             // 
@@ -2208,6 +2229,14 @@
             this.ExamFilterGroupBox.TabIndex = 35;
             this.ExamFilterGroupBox.TabStop = false;
             this.ExamFilterGroupBox.Text = "Filtrar Examenes";
+            // 
+            // ExamFilterStudentListBox
+            // 
+            this.ExamFilterStudentListBox.FormattingEnabled = true;
+            this.ExamFilterStudentListBox.Location = new System.Drawing.Point(201, 23);
+            this.ExamFilterStudentListBox.Name = "ExamFilterStudentListBox";
+            this.ExamFilterStudentListBox.Size = new System.Drawing.Size(130, 108);
+            this.ExamFilterStudentListBox.TabIndex = 36;
             // 
             // FilterDatePickerTo
             // 
@@ -2456,24 +2485,6 @@
             this.ActivitiesStudentsUnEnrollListBox.Size = new System.Drawing.Size(65, 121);
             this.ActivitiesStudentsUnEnrollListBox.TabIndex = 0;
             // 
-            // ExamFilterStudentListBox
-            // 
-            this.ExamFilterStudentListBox.FormattingEnabled = true;
-            this.ExamFilterStudentListBox.Location = new System.Drawing.Point(201, 23);
-            this.ExamFilterStudentListBox.Name = "ExamFilterStudentListBox";
-            this.ExamFilterStudentListBox.Size = new System.Drawing.Size(130, 108);
-            this.ExamFilterStudentListBox.TabIndex = 36;
-            // 
-            // btnSubjectReport
-            // 
-            this.btnSubjectReport.Location = new System.Drawing.Point(87, 77);
-            this.btnSubjectReport.Name = "btnSubjectReport";
-            this.btnSubjectReport.Size = new System.Drawing.Size(75, 23);
-            this.btnSubjectReport.TabIndex = 16;
-            this.btnSubjectReport.Text = "Reporte";
-            this.btnSubjectReport.UseVisualStyleBackColor = true;
-            this.btnSubjectReport.Click += new System.EventHandler(this.btnSubjectReport_Click);
-            // 
             // SubjectReportGroupBox
             // 
             this.SubjectReportGroupBox.Controls.Add(this.btnPrintReport);
@@ -2492,6 +2503,24 @@
             this.SubjectReportGroupBox.TabIndex = 37;
             this.SubjectReportGroupBox.TabStop = false;
             this.SubjectReportGroupBox.Text = "Reporte de Materias";
+            // 
+            // btnPrintReport
+            // 
+            this.btnPrintReport.Location = new System.Drawing.Point(200, 211);
+            this.btnPrintReport.Name = "btnPrintReport";
+            this.btnPrintReport.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintReport.TabIndex = 38;
+            this.btnPrintReport.Text = "Imprimir";
+            this.btnPrintReport.UseVisualStyleBackColor = true;
+            this.btnPrintReport.Click += new System.EventHandler(this.btnPrintReport_Click);
+            // 
+            // listBox5
+            // 
+            this.listBox5.FormattingEnabled = true;
+            this.listBox5.Location = new System.Drawing.Point(180, 23);
+            this.listBox5.Name = "listBox5";
+            this.listBox5.Size = new System.Drawing.Size(80, 108);
+            this.listBox5.TabIndex = 37;
             // 
             // listBox3
             // 
@@ -2562,29 +2591,13 @@
             this.listBox4.Size = new System.Drawing.Size(80, 108);
             this.listBox4.TabIndex = 25;
             // 
-            // listBox5
-            // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.Location = new System.Drawing.Point(180, 23);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(80, 108);
-            this.listBox5.TabIndex = 37;
-            // 
-            // btnPrintReport
-            // 
-            this.btnPrintReport.Location = new System.Drawing.Point(200, 211);
-            this.btnPrintReport.Name = "btnPrintReport";
-            this.btnPrintReport.Size = new System.Drawing.Size(75, 23);
-            this.btnPrintReport.TabIndex = 38;
-            this.btnPrintReport.Text = "Imprimir";
-            this.btnPrintReport.UseVisualStyleBackColor = true;
-            this.btnPrintReport.Click += new System.EventHandler(this.btnPrintReport_Click);
-            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.PaymentCreateGroupBox);
+            this.Controls.Add(this.PaymentGroupBox);
             this.Controls.Add(this.SubjectReportGroupBox);
             this.Controls.Add(this.SubjectGroupBox);
             this.Controls.Add(this.ExamFilterGroupBox);
@@ -2601,7 +2614,6 @@
             this.Controls.Add(this.btnModifyDB);
             this.Controls.Add(this.DBSave);
             this.Controls.Add(this.ActivityCreateGroupBox);
-            this.Controls.Add(this.PaymentCreateGroupBox);
             this.Controls.Add(this.TeacherCreateGroupBox);
             this.Controls.Add(this.SubjectCreateGroupBox);
             this.Controls.Add(this.ActivityStudentsGroupBox);
@@ -2616,7 +2628,6 @@
             this.Controls.Add(this.VanGroupBox);
             this.Controls.Add(this.TeacherGroupBox);
             this.Controls.Add(this.ActivityGroupBox);
-            this.Controls.Add(this.PaymentGroupBox);
             this.Controls.Add(this.ExamsGroupBox);
             this.Controls.Add(this.ActivityStudentsEnrollGroupBox);
             this.Name = "ERP";
@@ -2813,16 +2824,15 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.GroupBox PaymentCreateGroupBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox FeeMonthComboBox;
         private System.Windows.Forms.Button btnDeletePayment1;
         private System.Windows.Forms.Button btnPaymentSearchModify;
         private System.Windows.Forms.Button btnPaymentSearchDelete;
         private System.Windows.Forms.Button btnModifyPayment1;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox FeeCostTextBox;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Button btnCreateNewPayment;
         private System.Windows.Forms.ListBox roadmapListBox;
         private System.Windows.Forms.Button DBSave;
@@ -2907,5 +2917,7 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.ComboBox FeeYearComboBox;
+        private System.Windows.Forms.ListBox FeeStudentListBox;
     }
 }
