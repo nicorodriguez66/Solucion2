@@ -247,6 +247,18 @@
             this.ActivitiesUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ActivitiesStudentsUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ExamFilterStudentListBox = new System.Windows.Forms.ListBox();
+            this.btnSubjectReport = new System.Windows.Forms.Button();
+            this.SubjectReportGroupBox = new System.Windows.Forms.GroupBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.listBox5 = new System.Windows.Forms.ListBox();
+            this.btnPrintReport = new System.Windows.Forms.Button();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -277,6 +289,7 @@
             this.ExamScoreGroupBox.SuspendLayout();
             this.ActivityStudentsEnrollGroupBox.SuspendLayout();
             this.ActivityStudentsUnEnrollGroupBox.SuspendLayout();
+            this.SubjectReportGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPayments
@@ -431,13 +444,14 @@
             // 
             // SubjectGroupBox
             // 
+            this.SubjectGroupBox.Controls.Add(this.btnSubjectReport);
             this.SubjectGroupBox.Controls.Add(this.btnCreateSubject);
             this.SubjectGroupBox.Controls.Add(this.btnSubjectModify);
             this.SubjectGroupBox.Controls.Add(this.btnSubjectList);
             this.SubjectGroupBox.Controls.Add(this.btnSubjectDelete);
-            this.SubjectGroupBox.Location = new System.Drawing.Point(12, 129);
+            this.SubjectGroupBox.Location = new System.Drawing.Point(6, 136);
             this.SubjectGroupBox.Name = "SubjectGroupBox";
-            this.SubjectGroupBox.Size = new System.Drawing.Size(173, 82);
+            this.SubjectGroupBox.Size = new System.Drawing.Size(173, 104);
             this.SubjectGroupBox.TabIndex = 19;
             this.SubjectGroupBox.TabStop = false;
             this.SubjectGroupBox.Text = "Materias";
@@ -2188,9 +2202,9 @@
             this.ExamFilterGroupBox.Controls.Add(this.label35);
             this.ExamFilterGroupBox.Controls.Add(this.btnExamFilter);
             this.ExamFilterGroupBox.Controls.Add(this.ExamFilterListBox);
-            this.ExamFilterGroupBox.Location = new System.Drawing.Point(769, 530);
+            this.ExamFilterGroupBox.Location = new System.Drawing.Point(751, 472);
             this.ExamFilterGroupBox.Name = "ExamFilterGroupBox";
-            this.ExamFilterGroupBox.Size = new System.Drawing.Size(429, 240);
+            this.ExamFilterGroupBox.Size = new System.Drawing.Size(343, 240);
             this.ExamFilterGroupBox.TabIndex = 35;
             this.ExamFilterGroupBox.TabStop = false;
             this.ExamFilterGroupBox.Text = "Filtrar Examenes";
@@ -2450,11 +2464,129 @@
             this.ExamFilterStudentListBox.Size = new System.Drawing.Size(130, 108);
             this.ExamFilterStudentListBox.TabIndex = 36;
             // 
+            // btnSubjectReport
+            // 
+            this.btnSubjectReport.Location = new System.Drawing.Point(87, 77);
+            this.btnSubjectReport.Name = "btnSubjectReport";
+            this.btnSubjectReport.Size = new System.Drawing.Size(75, 23);
+            this.btnSubjectReport.TabIndex = 16;
+            this.btnSubjectReport.Text = "Reporte";
+            this.btnSubjectReport.UseVisualStyleBackColor = true;
+            this.btnSubjectReport.Click += new System.EventHandler(this.btnSubjectReport_Click);
+            // 
+            // SubjectReportGroupBox
+            // 
+            this.SubjectReportGroupBox.Controls.Add(this.btnPrintReport);
+            this.SubjectReportGroupBox.Controls.Add(this.listBox5);
+            this.SubjectReportGroupBox.Controls.Add(this.listBox3);
+            this.SubjectReportGroupBox.Controls.Add(this.dateTimePicker2);
+            this.SubjectReportGroupBox.Controls.Add(this.dateTimePicker3);
+            this.SubjectReportGroupBox.Controls.Add(this.checkBox1);
+            this.SubjectReportGroupBox.Controls.Add(this.checkBox2);
+            this.SubjectReportGroupBox.Controls.Add(this.checkBox3);
+            this.SubjectReportGroupBox.Controls.Add(this.button1);
+            this.SubjectReportGroupBox.Controls.Add(this.listBox4);
+            this.SubjectReportGroupBox.Location = new System.Drawing.Point(809, 437);
+            this.SubjectReportGroupBox.Name = "SubjectReportGroupBox";
+            this.SubjectReportGroupBox.Size = new System.Drawing.Size(275, 240);
+            this.SubjectReportGroupBox.TabIndex = 37;
+            this.SubjectReportGroupBox.TabStop = false;
+            this.SubjectReportGroupBox.Text = "Reporte de Materias";
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.Location = new System.Drawing.Point(94, 23);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(80, 108);
+            this.listBox3.TabIndex = 36;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(133, 155);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(61, 20);
+            this.dateTimePicker2.TabIndex = 35;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(66, 155);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(61, 20);
+            this.dateTimePicker3.TabIndex = 34;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 183);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(101, 17);
+            this.checkBox1.TabIndex = 33;
+            this.checkBox1.Text = "Numero Materia";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(6, 160);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(61, 17);
+            this.checkBox2.TabIndex = 32;
+            this.checkBox2.Text = "Fechas";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(6, 137);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(77, 17);
+            this.checkBox3.TabIndex = 31;
+            this.checkBox3.Text = "Aprobados";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(124, 211);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "Filtrar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // listBox4
+            // 
+            this.listBox4.FormattingEnabled = true;
+            this.listBox4.Location = new System.Drawing.Point(8, 23);
+            this.listBox4.Name = "listBox4";
+            this.listBox4.Size = new System.Drawing.Size(80, 108);
+            this.listBox4.TabIndex = 25;
+            // 
+            // listBox5
+            // 
+            this.listBox5.FormattingEnabled = true;
+            this.listBox5.Location = new System.Drawing.Point(180, 23);
+            this.listBox5.Name = "listBox5";
+            this.listBox5.Size = new System.Drawing.Size(80, 108);
+            this.listBox5.TabIndex = 37;
+            // 
+            // btnPrintReport
+            // 
+            this.btnPrintReport.Location = new System.Drawing.Point(200, 211);
+            this.btnPrintReport.Name = "btnPrintReport";
+            this.btnPrintReport.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintReport.TabIndex = 38;
+            this.btnPrintReport.Text = "Imprimir";
+            this.btnPrintReport.UseVisualStyleBackColor = true;
+            this.btnPrintReport.Click += new System.EventHandler(this.btnPrintReport_Click);
+            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.SubjectReportGroupBox);
+            this.Controls.Add(this.SubjectGroupBox);
             this.Controls.Add(this.ExamFilterGroupBox);
             this.Controls.Add(this.ActivityStudentsUnEnrollGroupBox);
             this.Controls.Add(this.StudentModifyGroupBox);
@@ -2485,7 +2617,6 @@
             this.Controls.Add(this.TeacherGroupBox);
             this.Controls.Add(this.ActivityGroupBox);
             this.Controls.Add(this.PaymentGroupBox);
-            this.Controls.Add(this.SubjectGroupBox);
             this.Controls.Add(this.ExamsGroupBox);
             this.Controls.Add(this.ActivityStudentsEnrollGroupBox);
             this.Name = "ERP";
@@ -2537,6 +2668,8 @@
             this.ActivityStudentsEnrollGroupBox.PerformLayout();
             this.ActivityStudentsUnEnrollGroupBox.ResumeLayout(false);
             this.ActivityStudentsUnEnrollGroupBox.PerformLayout();
+            this.SubjectReportGroupBox.ResumeLayout(false);
+            this.SubjectReportGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2762,5 +2895,17 @@
         private System.Windows.Forms.ListBox ActivitiesUnEnrollListBox;
         private System.Windows.Forms.ListBox ActivitiesStudentsUnEnrollListBox;
         private System.Windows.Forms.ListBox ExamFilterStudentListBox;
+        private System.Windows.Forms.Button btnSubjectReport;
+        private System.Windows.Forms.GroupBox SubjectReportGroupBox;
+        private System.Windows.Forms.Button btnPrintReport;
+        private System.Windows.Forms.ListBox listBox5;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listBox4;
     }
 }

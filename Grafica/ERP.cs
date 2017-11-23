@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Persistencia;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Solucion2
 {
@@ -28,7 +30,7 @@ namespace Solucion2
             InitializeComponent();
             DefaultPanelLocation.X = ModulesGroupBox.Width + 15;
             DefaultPanelLocation.Y = ModulesGroupBox.Location.Y;
-            this.Size = new Size(500, 500);
+            this.Size = new Size(600, 400);
             mysystem = new ERPsystem();
             dbmanager = new Persistence();
             empty();
@@ -100,6 +102,7 @@ namespace Solucion2
             ExamScoreGroupBox.Visible = false;
             ActivityStudentsEnrollGroupBox.Visible = false;
             ActivityStudentsUnEnrollGroupBox.Visible = false;
+            SubjectReportGroupBox.Visible = false;
             btnSubjectSearch.Hide();
             btnSubjectSearchModify.Hide();
             btnSubjectSearchModify1.Hide();
@@ -1567,6 +1570,35 @@ namespace Solucion2
         private void ExamSubjectEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSubjectReport_Click(object sender, EventArgs e)
+        {
+            
+
+            hideallgrouboxes();
+            SubjectReportGroupBox.Visible = true;
+            SubjectReportGroupBox.Location = DefaultPanelLocation;
+
+
+        }
+
+        private void btnPrintReport_Click(object sender, EventArgs e)
+        {
+
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    string[] files = Directory.GetFiles(fbd.SelectedPath);
+                    Bitmap printscreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                    Graphics graphics = Graphics.FromImage(printscreen as Image);
+                    graphics.CopyFromScreen(0, 0, 0, 0, printscreen.Size);
+                    printscreen.Save(fbd.SelectedPath + @"\Reporte.jpg", ImageFormat.Jpeg);
+                }
+            }
         }
     }
 }
