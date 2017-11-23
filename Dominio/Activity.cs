@@ -61,6 +61,21 @@ namespace Dominio
         {
             paid = true;
         }
-        
+        public void ActivityEnrollStudent(Student OneStudent)
+        {
+            if (!students.Any(s => s== OneStudent))
+            {
+                students.Add(OneStudent);
+            }
+        }
+        public void ActivityUnEnrollStudent(Student OneStudent)
+        {
+            if (students.Any(s => s== OneStudent))
+            {
+                students.Remove(students.Find(s => s== OneStudent));
+            }
+        }
+
+
     }
 }

@@ -246,6 +246,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.ActivitiesUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ActivitiesStudentsUnEnrollListBox = new System.Windows.Forms.ListBox();
+            this.ExamFilterStudentListBox = new System.Windows.Forms.ListBox();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -2135,6 +2136,7 @@
             this.ExamSubjectEnrollListBox.Name = "ExamSubjectEnrollListBox";
             this.ExamSubjectEnrollListBox.Size = new System.Drawing.Size(94, 108);
             this.ExamSubjectEnrollListBox.TabIndex = 0;
+            this.ExamSubjectEnrollListBox.SelectedIndexChanged += new System.EventHandler(this.ExamSubjectEnrollListBox_SelectedIndexChanged);
             // 
             // ExamUnenrollGroupBox
             // 
@@ -2177,6 +2179,7 @@
             // 
             // ExamFilterGroupBox
             // 
+            this.ExamFilterGroupBox.Controls.Add(this.ExamFilterStudentListBox);
             this.ExamFilterGroupBox.Controls.Add(this.FilterDatePickerTo);
             this.ExamFilterGroupBox.Controls.Add(this.FilterDatePickerFrom);
             this.ExamFilterGroupBox.Controls.Add(this.FilterSubjectCheckBox);
@@ -2187,7 +2190,7 @@
             this.ExamFilterGroupBox.Controls.Add(this.ExamFilterListBox);
             this.ExamFilterGroupBox.Location = new System.Drawing.Point(769, 530);
             this.ExamFilterGroupBox.Name = "ExamFilterGroupBox";
-            this.ExamFilterGroupBox.Size = new System.Drawing.Size(205, 240);
+            this.ExamFilterGroupBox.Size = new System.Drawing.Size(429, 240);
             this.ExamFilterGroupBox.TabIndex = 35;
             this.ExamFilterGroupBox.TabStop = false;
             this.ExamFilterGroupBox.Text = "Filtrar Examenes";
@@ -2262,6 +2265,7 @@
             this.ExamFilterListBox.Name = "ExamFilterListBox";
             this.ExamFilterListBox.Size = new System.Drawing.Size(130, 108);
             this.ExamFilterListBox.TabIndex = 25;
+            this.ExamFilterListBox.SelectedIndexChanged += new System.EventHandler(this.ExamFilterListBox_SelectedIndexChanged);
             // 
             // ExamScoreGroupBox
             // 
@@ -2438,15 +2442,23 @@
             this.ActivitiesStudentsUnEnrollListBox.Size = new System.Drawing.Size(65, 121);
             this.ActivitiesStudentsUnEnrollListBox.TabIndex = 0;
             // 
+            // ExamFilterStudentListBox
+            // 
+            this.ExamFilterStudentListBox.FormattingEnabled = true;
+            this.ExamFilterStudentListBox.Location = new System.Drawing.Point(201, 23);
+            this.ExamFilterStudentListBox.Name = "ExamFilterStudentListBox";
+            this.ExamFilterStudentListBox.Size = new System.Drawing.Size(130, 108);
+            this.ExamFilterStudentListBox.TabIndex = 36;
+            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.ExamFilterGroupBox);
             this.Controls.Add(this.ActivityStudentsUnEnrollGroupBox);
             this.Controls.Add(this.StudentModifyGroupBox);
             this.Controls.Add(this.ExamScoreGroupBox);
-            this.Controls.Add(this.ExamFilterGroupBox);
             this.Controls.Add(this.ExamUnenrollGroupBox);
             this.Controls.Add(this.ExamEnrollGroupBox);
             this.Controls.Add(this.ExamDeleteGroupBox);
@@ -2749,5 +2761,6 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.ListBox ActivitiesUnEnrollListBox;
         private System.Windows.Forms.ListBox ActivitiesStudentsUnEnrollListBox;
+        private System.Windows.Forms.ListBox ExamFilterStudentListBox;
     }
 }

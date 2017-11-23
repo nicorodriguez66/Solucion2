@@ -26,9 +26,11 @@ namespace Persistencia
 
         public Persistence()
         {
-            //emptybase();
+            this.Database.CreateIfNotExists();
+            this.Database.Connection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Starter ;Integrated Security=True";
+            conexionstr = this.Database.Connection.ConnectionString;
         }
-
+        
         public void emptybase(string dbname)
         {
             this.Database.Connection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=" + dbname + ";Integrated Security=True";

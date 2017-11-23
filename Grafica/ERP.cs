@@ -393,8 +393,6 @@ namespace Solucion2
 
         private void button27_Click(object sender, EventArgs e)
         {
-            dbmanager.deleteParam("Parametro2");
-            dbmanager.Dispose();
             this.Close();
         }
 
@@ -561,9 +559,7 @@ namespace Solucion2
             }
             hideallgrouboxes();
         }
-
         
-
         private void btnTeacherList_Click(object sender, EventArgs e)
         {
             hideallgrouboxes();
@@ -574,7 +570,6 @@ namespace Solucion2
 
         private void btnLoadData_Click(object sender, EventArgs e)
         {
-            //mysystem = mysystem.LoadData();
             preload();
             hideallgrouboxes();
             refreshdata();
@@ -582,7 +577,7 @@ namespace Solucion2
 
         private void empty()
         {
-            dbmanager.emptybase("Parametro2");
+            dbmanager.emptybase("Starter");
             Student dummy = new Student();
             dbmanager.SaveStudent(dummy);
             dbmanager.DeleteStudent(dummy);
@@ -1401,6 +1396,8 @@ namespace Solucion2
             ExamFilterGroupBox.Visible = true;
             ExamFilterGroupBox.Location = DefaultPanelLocation;
             ExamFilterListBox.Items.Clear();
+            ExamFilterStudentListBox.Items.Clear();
+            ExamFilterListBox.HorizontalScrollbar = true;
         }
 
         private void btnExamFilter_Click(object sender, EventArgs e)
@@ -1408,6 +1405,7 @@ namespace Solucion2
             List<Exam> origin = mysystem.allexams;
             List<Exam> L1,L2,L3; L1 = origin; L2 = origin; L3 = origin;
             ExamFilterListBox.Items.Clear();
+            ExamFilterStudentListBox.Items.Clear();
             sortme(origin.OrderBy(p => p.ExamId).ToList());
 
             if (FilterApprovalCheckBox.Checked)
@@ -1472,6 +1470,8 @@ namespace Solucion2
                 string[] subStrings = ScoreStudentsEnrolled.SelectedItem.ToString().Split(' ');
                 searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[2]));
                 searchedExam.qualify(searchedStudent, Int32.Parse(ScoreComboBox.SelectedItem.ToString()));
+                dbmanager.SaveChanges();
+                hideallgrouboxes();
             }
         }
 
@@ -1501,12 +1501,14 @@ namespace Solucion2
 
                 string[] s2 = ActivitiesStudentsEnrollListBox.SelectedItem.ToString().Split(' ');
                 searchedStudent = mysystem.searchStudent(Int32.Parse(s2[2]));
-                
+
                 searchedActivity.paid = true;
-                searchedActivity.students.Add(searchedStudent);
+
+                searchedActivity.ActivityEnrollStudent(searchedStudent);
+                
                 searchedStudent.payments.Add(searchedActivity);
                 dbmanager.ModifyStudent(searchedStudent);
-                dbmanager.ModifyActivity(searchedActivity);
+                //dbmanager.ModifyActivity(searchedActivity);
                 dbmanager.SaveChanges();
                 hideallgrouboxes();
             }
@@ -1517,7 +1519,7 @@ namespace Solucion2
             if (ActivitiesUnEnrollListBox.SelectedItem != null)
             {
                 string[] subStrings = ActivitiesUnEnrollListBox.SelectedItem.ToString().Split(' ');
-                searchedStudent = mysystem.searchStudent(Int32.Parse(subStrings[1]));
+                searchedActivity = mysystem.searchActivity(Int32.Parse(subStrings[1]));
                 ActivitiesStudentsUnEnrollListBox.Items.Clear();
                 foreach (Student element in searchedActivity.students)
                 {
@@ -1537,14 +1539,34 @@ namespace Solucion2
                 string[] s2 = ActivitiesStudentsUnEnrollListBox.SelectedItem.ToString().Split(' ');
                 searchedStudent = mysystem.searchStudent(Int32.Parse(s2[2]));
 
-                searchedActivity.paid = true;
-                searchedActivity.students.Remove(searchedStudent);
+                searchedActivity.paid = false;
+                searchedActivity.ActivityUnEnrollStudent(searchedStudent);
+
+
                 searchedStudent.payments.Remove(searchedActivity);
                 dbmanager.ModifyStudent(searchedStudent);
                 dbmanager.ModifyActivity(searchedActivity);
                 dbmanager.SaveChanges();
                 hideallgrouboxes();
             }
+        }
+
+        private void ExamFilterListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string myStringSubject = ExamFilterListBox.SelectedItem.ToString();
+            string[] subStrings1 = myStringSubject.Split(' ');
+            searchedExam = mysystem.searchExam(Int32.Parse(subStrings1[0]));//substring1[0] 0 = examid
+
+            ExamFilterStudentListBox.Items.Clear();
+            foreach (Tuple<Student, int> element in searchedExam.enrolled)
+            {
+                ExamFilterStudentListBox.Items.Add(element.Item1.ToString()+" Pts."+ element.Item2.ToString());
+            }
+        }
+
+        private void ExamSubjectEnrollListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
