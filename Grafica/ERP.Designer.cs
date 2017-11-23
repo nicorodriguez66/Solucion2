@@ -250,16 +250,15 @@
             this.ActivitiesUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.ActivitiesStudentsUnEnrollListBox = new System.Windows.Forms.ListBox();
             this.SubjectReportGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExamsListView = new System.Windows.Forms.ListView();
             this.btnPrintReport = new System.Windows.Forms.Button();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.ReportStudentsListBox = new System.Windows.Forms.ListBox();
+            this.ReportExamsListBox = new System.Windows.Forms.ListBox();
+            this.StudentQuantityCheckBox = new System.Windows.Forms.CheckBox();
+            this.SubjectNameCheckBox = new System.Windows.Forms.CheckBox();
+            this.AverageCheckBox = new System.Windows.Forms.CheckBox();
+            this.BtnReportFilter = new System.Windows.Forms.Button();
+            this.ReportSubjectLisBox = new System.Windows.Forms.ListBox();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -1753,7 +1752,7 @@
             this.PaymentCreateGroupBox.Controls.Add(this.label31);
             this.PaymentCreateGroupBox.Controls.Add(this.label32);
             this.PaymentCreateGroupBox.Controls.Add(this.btnCreateNewPayment);
-            this.PaymentCreateGroupBox.Location = new System.Drawing.Point(540, 409);
+            this.PaymentCreateGroupBox.Location = new System.Drawing.Point(1112, 327);
             this.PaymentCreateGroupBox.Name = "PaymentCreateGroupBox";
             this.PaymentCreateGroupBox.Size = new System.Drawing.Size(318, 170);
             this.PaymentCreateGroupBox.TabIndex = 32;
@@ -2487,22 +2486,31 @@
             // 
             // SubjectReportGroupBox
             // 
+            this.SubjectReportGroupBox.Controls.Add(this.ExamsListView);
             this.SubjectReportGroupBox.Controls.Add(this.btnPrintReport);
-            this.SubjectReportGroupBox.Controls.Add(this.listBox5);
-            this.SubjectReportGroupBox.Controls.Add(this.listBox3);
-            this.SubjectReportGroupBox.Controls.Add(this.dateTimePicker2);
-            this.SubjectReportGroupBox.Controls.Add(this.dateTimePicker3);
-            this.SubjectReportGroupBox.Controls.Add(this.checkBox1);
-            this.SubjectReportGroupBox.Controls.Add(this.checkBox2);
-            this.SubjectReportGroupBox.Controls.Add(this.checkBox3);
-            this.SubjectReportGroupBox.Controls.Add(this.button1);
-            this.SubjectReportGroupBox.Controls.Add(this.listBox4);
-            this.SubjectReportGroupBox.Location = new System.Drawing.Point(809, 437);
+            this.SubjectReportGroupBox.Controls.Add(this.ReportStudentsListBox);
+            this.SubjectReportGroupBox.Controls.Add(this.ReportExamsListBox);
+            this.SubjectReportGroupBox.Controls.Add(this.StudentQuantityCheckBox);
+            this.SubjectReportGroupBox.Controls.Add(this.SubjectNameCheckBox);
+            this.SubjectReportGroupBox.Controls.Add(this.AverageCheckBox);
+            this.SubjectReportGroupBox.Controls.Add(this.BtnReportFilter);
+            this.SubjectReportGroupBox.Controls.Add(this.ReportSubjectLisBox);
+            this.SubjectReportGroupBox.Location = new System.Drawing.Point(575, 474);
             this.SubjectReportGroupBox.Name = "SubjectReportGroupBox";
             this.SubjectReportGroupBox.Size = new System.Drawing.Size(275, 240);
             this.SubjectReportGroupBox.TabIndex = 37;
             this.SubjectReportGroupBox.TabStop = false;
             this.SubjectReportGroupBox.Text = "Reporte de Materias";
+            // 
+            // ExamsListView
+            // 
+            this.ExamsListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.ExamsListView.FullRowSelect = true;
+            this.ExamsListView.Location = new System.Drawing.Point(94, 23);
+            this.ExamsListView.Name = "ExamsListView";
+            this.ExamsListView.Size = new System.Drawing.Size(166, 108);
+            this.ExamsListView.TabIndex = 39;
+            this.ExamsListView.UseCompatibleStateImageBehavior = false;
             // 
             // btnPrintReport
             // 
@@ -2514,82 +2522,70 @@
             this.btnPrintReport.UseVisualStyleBackColor = true;
             this.btnPrintReport.Click += new System.EventHandler(this.btnPrintReport_Click);
             // 
-            // listBox5
+            // ReportStudentsListBox
             // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.Location = new System.Drawing.Point(180, 23);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(80, 108);
-            this.listBox5.TabIndex = 37;
+            this.ReportStudentsListBox.FormattingEnabled = true;
+            this.ReportStudentsListBox.Location = new System.Drawing.Point(180, 23);
+            this.ReportStudentsListBox.Name = "ReportStudentsListBox";
+            this.ReportStudentsListBox.Size = new System.Drawing.Size(80, 108);
+            this.ReportStudentsListBox.TabIndex = 37;
             // 
-            // listBox3
+            // ReportExamsListBox
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(94, 23);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(80, 108);
-            this.listBox3.TabIndex = 36;
+            this.ReportExamsListBox.FormattingEnabled = true;
+            this.ReportExamsListBox.Location = new System.Drawing.Point(94, 23);
+            this.ReportExamsListBox.Name = "ReportExamsListBox";
+            this.ReportExamsListBox.Size = new System.Drawing.Size(80, 108);
+            this.ReportExamsListBox.TabIndex = 36;
             // 
-            // dateTimePicker2
+            // StudentQuantityCheckBox
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(133, 155);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(61, 20);
-            this.dateTimePicker2.TabIndex = 35;
+            this.StudentQuantityCheckBox.AutoSize = true;
+            this.StudentQuantityCheckBox.Location = new System.Drawing.Point(6, 183);
+            this.StudentQuantityCheckBox.Name = "StudentQuantityCheckBox";
+            this.StudentQuantityCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.StudentQuantityCheckBox.TabIndex = 33;
+            this.StudentQuantityCheckBox.Text = "Cantidad Alumnos";
+            this.StudentQuantityCheckBox.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker3
+            // SubjectNameCheckBox
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(66, 155);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(61, 20);
-            this.dateTimePicker3.TabIndex = 34;
+            this.SubjectNameCheckBox.AutoSize = true;
+            this.SubjectNameCheckBox.Location = new System.Drawing.Point(6, 160);
+            this.SubjectNameCheckBox.Name = "SubjectNameCheckBox";
+            this.SubjectNameCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.SubjectNameCheckBox.TabIndex = 32;
+            this.SubjectNameCheckBox.Text = "Nombre Materia";
+            this.SubjectNameCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // AverageCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 183);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(101, 17);
-            this.checkBox1.TabIndex = 33;
-            this.checkBox1.Text = "Numero Materia";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.AverageCheckBox.AutoSize = true;
+            this.AverageCheckBox.Location = new System.Drawing.Point(6, 137);
+            this.AverageCheckBox.Name = "AverageCheckBox";
+            this.AverageCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.AverageCheckBox.TabIndex = 31;
+            this.AverageCheckBox.Text = "% Aprobación";
+            this.AverageCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // BtnReportFilter
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 160);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(61, 17);
-            this.checkBox2.TabIndex = 32;
-            this.checkBox2.Text = "Fechas";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.BtnReportFilter.Location = new System.Drawing.Point(124, 211);
+            this.BtnReportFilter.Name = "BtnReportFilter";
+            this.BtnReportFilter.Size = new System.Drawing.Size(75, 23);
+            this.BtnReportFilter.TabIndex = 27;
+            this.BtnReportFilter.Text = "Filtrar";
+            this.BtnReportFilter.UseVisualStyleBackColor = true;
+            this.BtnReportFilter.Click += new System.EventHandler(this.BtnReportFilter_Click);
             // 
-            // checkBox3
+            // ReportSubjectLisBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 137);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(77, 17);
-            this.checkBox3.TabIndex = 31;
-            this.checkBox3.Text = "Aprobados";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(124, 211);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Filtrar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.Location = new System.Drawing.Point(8, 23);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(80, 108);
-            this.listBox4.TabIndex = 25;
+            this.ReportSubjectLisBox.FormattingEnabled = true;
+            this.ReportSubjectLisBox.Location = new System.Drawing.Point(8, 23);
+            this.ReportSubjectLisBox.Name = "ReportSubjectLisBox";
+            this.ReportSubjectLisBox.Size = new System.Drawing.Size(80, 108);
+            this.ReportSubjectLisBox.TabIndex = 25;
+            this.ReportSubjectLisBox.SelectedIndexChanged += new System.EventHandler(this.ReportSubjectLisBox_SelectedIndexChanged);
             // 
             // ERP
             // 
@@ -2908,16 +2904,15 @@
         private System.Windows.Forms.Button btnSubjectReport;
         private System.Windows.Forms.GroupBox SubjectReportGroupBox;
         private System.Windows.Forms.Button btnPrintReport;
-        private System.Windows.Forms.ListBox listBox5;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.ListBox ReportStudentsListBox;
+        private System.Windows.Forms.ListBox ReportExamsListBox;
+        private System.Windows.Forms.CheckBox StudentQuantityCheckBox;
+        private System.Windows.Forms.CheckBox SubjectNameCheckBox;
+        private System.Windows.Forms.CheckBox AverageCheckBox;
+        private System.Windows.Forms.Button BtnReportFilter;
+        private System.Windows.Forms.ListBox ReportSubjectLisBox;
         private System.Windows.Forms.ComboBox FeeYearComboBox;
         private System.Windows.Forms.ListBox FeeStudentListBox;
+        private System.Windows.Forms.ListView ExamsListView;
     }
 }

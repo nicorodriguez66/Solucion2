@@ -101,5 +101,13 @@ namespace Dominio
             else
                 return -1;
         }
+
+        public float ExamAverage()
+        {
+            if (this.enrolled.Count() > 0)
+                return this.ExamApproved().Count() / this.enrolled.Count();
+            else
+                return 0;
+        }
     }
 }

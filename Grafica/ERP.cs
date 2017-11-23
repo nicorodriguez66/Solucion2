@@ -241,6 +241,12 @@ namespace Solucion2
                 FeeYearComboBox.Items.Add(i.ToString());
             }
 
+            ReportSubjectLisBox.Items.Clear();
+            foreach (Subject element in mysystem.allsubjects)
+            {
+                ReportSubjectLisBox.Items.Add(element.ToString());
+            }
+            
             FeeMonthComboBox.Items.Clear();
             ExamApprovalComboBox.Items.Clear();
             ScoreComboBox.Items.Clear();
@@ -1457,6 +1463,28 @@ namespace Solucion2
             }
         }
 
+        public void sortmeReport(List<Subject> origin)
+        {
+            ReportSubjectLisBox.Items.Clear();
+            foreach (Subject element in origin)
+            {
+                ReportSubjectLisBox.Items.Add(element.ToString());
+            }
+        }
+        public void sortmeReportTuple(List<Tuple<Subject,float>> origin)
+        {
+            ReportSubjectLisBox.Items.Clear();
+            foreach (Tuple<Subject,float> element in origin)
+            {
+                ReportSubjectLisBox.Items.Add(element.Item1.ToString());
+            }
+        }
+
+
+
+
+
+
         private void btnUpdateScore_Click(object sender, EventArgs e)
         {
             hideallgrouboxes();
@@ -1591,7 +1619,7 @@ namespace Solucion2
             hideallgrouboxes();
             SubjectReportGroupBox.Visible = true;
             SubjectReportGroupBox.Location = DefaultPanelLocation;
-
+            refreshdata();
 
         }
 
@@ -1656,6 +1684,100 @@ namespace Solucion2
                     MessageBox.Show("Esta cuota ya fue pagada. Seleccione otra para pagar");
                 }
             }
+        }
+
+        private void ReportSubjectLisBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ReportSubjectLisBox.SelectedItem != null)
+            {
+                string myString = ReportSubjectLisBox.SelectedItem.ToString();
+                string[] subStrings = myString.Split(' ');
+                searchedSubject = mysystem.searchSubject(Int32.Parse(subStrings[0]));
+
+                ExamsListView.Items.Clear();
+                ExamsListView.Scrollable = true;
+                ExamsListView.Alignment = ListViewAlignment.Left;
+
+
+                foreach (Exam element in mysystem.allexams)
+                {
+                    if(element.subject.Equals(searchedSubject))
+                    {
+                        ExamsListView.Items.Add(element.ToString());
+                        if (element.ExamAverage() >= 0.7)
+                        {
+                            ExamsListView.Items[ExamsListView.Items.Count-1].BackColor= Color.Green;
+                        }
+                        else
+                        {
+                            ExamsListView.Items[ExamsListView.Items.Count-1].BackColor = Color.Red;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnReportFilter_Click(object sender, EventArgs e)
+        {
+            List<Subject> origin = mysystem.allsubjects;
+            List<Subject> L1, L2, L3; L1 = origin; L2 = origin; L3 = origin;        
+            ExamsListView.Items.Clear();
+            sortmeReport(origin.OrderBy(p => p.codeId).ToList());
+
+            if (StudentQuantityCheckBox.Checked)
+            {
+                L1 = origin.OrderByDescending(p => p.students.Count).ToList();
+                sortmeReport(L1);
+            }
+            if (SubjectNameCheckBox.Checked)
+            {
+                L2 = L1.OrderByDescending(p => p.codeId).ToList();
+                sortmeReport(L2);
+            }        
+            if (AverageCheckBox.Checked)
+            {
+                List<Tuple<Subject,float>> L4 = new List<Tuple<Subject, float>>();
+                foreach (Subject elementSubject in mysystem.allsubjects) 
+                {
+                    if (!ContainsTupleList(elementSubject, L4))
+                    {
+                        Tuple<Subject, float> OneTuple = new Tuple<Subject, float>(elementSubject, 0);
+                        L4.Add(OneTuple);
+                    }                    
+                    foreach (Exam elementExam in mysystem.allexams)
+                    {
+                        if (elementExam.subject.codeId.Equals(elementSubject.codeId))
+                        {
+                            float actual = L4[pos(elementSubject, L4)].Item2;
+                            L4.Remove(L4[pos(elementSubject, L4)]);
+                            L4.Add(new Tuple<Subject, float>(elementSubject, actual + elementExam.ExamAverage()));
+                        }        
+                    }
+                }
+                L4 = L4.OrderByDescending(p => p.Item2).ToList();
+                sortmeReportTuple(L4);
+            }
+        }
+        int pos(Subject OneSubject, List<Tuple<Subject, float>> OneList)
+        {
+            int OnePosition = 0;
+            foreach(Tuple<Subject, float> OneTuple in OneList)
+            {
+                if (!OneTuple.Item1.codeId.Equals(OneSubject.codeId))
+                    OnePosition++;
+            }
+            return OnePosition;
+        }
+
+        bool ContainsTupleList(Subject OneSubject, List<Tuple<Subject, float>> OneList)
+        {
+            bool flag = false;
+            foreach (Tuple<Subject, float> OneTuple in OneList)
+            {
+                if (OneTuple.Item1.codeId.Equals(OneSubject.codeId))
+                    flag = true;
+            }
+            return flag;
         }
     }
 }
