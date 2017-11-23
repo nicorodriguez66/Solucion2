@@ -131,7 +131,7 @@
             this.btnVanModify1 = new System.Windows.Forms.Button();
             this.btnVanSearchDelete = new System.Windows.Forms.Button();
             this.btnVanSearchModify = new System.Windows.Forms.Button();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.VanEfficiencyTextBox = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -259,6 +259,9 @@
             this.AverageCheckBox = new System.Windows.Forms.CheckBox();
             this.BtnReportFilter = new System.Windows.Forms.Button();
             this.ReportSubjectLisBox = new System.Windows.Forms.ListBox();
+            this.VanEfficiencyCheckBox = new System.Windows.Forms.CheckBox();
+            this.btnSortVans = new System.Windows.Forms.Button();
+            this.CapacityCheckBox = new System.Windows.Forms.CheckBox();
             this.ModulesGroupBox.SuspendLayout();
             this.StudentGroupBox.SuspendLayout();
             this.SubjectGroupBox.SuspendLayout();
@@ -1279,7 +1282,7 @@
             this.VanCreateGroupBox.Controls.Add(this.btnVanModify1);
             this.VanCreateGroupBox.Controls.Add(this.btnVanSearchDelete);
             this.VanCreateGroupBox.Controls.Add(this.btnVanSearchModify);
-            this.VanCreateGroupBox.Controls.Add(this.textBox13);
+            this.VanCreateGroupBox.Controls.Add(this.VanEfficiencyTextBox);
             this.VanCreateGroupBox.Controls.Add(this.label17);
             this.VanCreateGroupBox.Controls.Add(this.label18);
             this.VanCreateGroupBox.Controls.Add(this.label20);
@@ -1343,21 +1346,21 @@
             this.btnVanSearchModify.UseVisualStyleBackColor = true;
             this.btnVanSearchModify.Click += new System.EventHandler(this.btnVanSearchModify_Click);
             // 
-            // textBox13
+            // VanEfficiencyTextBox
             // 
-            this.textBox13.Location = new System.Drawing.Point(64, 85);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(130, 20);
-            this.textBox13.TabIndex = 23;
+            this.VanEfficiencyTextBox.Location = new System.Drawing.Point(64, 85);
+            this.VanEfficiencyTextBox.Name = "VanEfficiencyTextBox";
+            this.VanEfficiencyTextBox.Size = new System.Drawing.Size(130, 20);
+            this.VanEfficiencyTextBox.TabIndex = 23;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(6, 92);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(35, 13);
+            this.label17.Size = new System.Drawing.Size(51, 13);
             this.label17.TabIndex = 22;
-            this.label17.Text = "IdVan";
+            this.label17.Text = "Consumo";
             // 
             // label18
             // 
@@ -1654,12 +1657,15 @@
             // 
             // VanList
             // 
+            this.VanList.Controls.Add(this.CapacityCheckBox);
+            this.VanList.Controls.Add(this.btnSortVans);
+            this.VanList.Controls.Add(this.VanEfficiencyCheckBox);
             this.VanList.Controls.Add(this.roadmapListBox);
             this.VanList.Controls.Add(this.label19);
             this.VanList.Controls.Add(this.VanAvailableListBox1);
             this.VanList.Location = new System.Drawing.Point(814, 31);
             this.VanList.Name = "VanList";
-            this.VanList.Size = new System.Drawing.Size(160, 170);
+            this.VanList.Size = new System.Drawing.Size(160, 199);
             this.VanList.TabIndex = 30;
             this.VanList.TabStop = false;
             this.VanList.Text = "Listar Camionetas";
@@ -1873,6 +1879,7 @@
             this.DBSave.TabIndex = 33;
             this.DBSave.Text = "DB";
             this.DBSave.UseVisualStyleBackColor = true;
+            this.DBSave.Visible = false;
             this.DBSave.Click += new System.EventHandler(this.DBSave_Click);
             // 
             // btnModifyDB
@@ -1883,6 +1890,7 @@
             this.btnModifyDB.TabIndex = 34;
             this.btnModifyDB.Text = "ModifyDB";
             this.btnModifyDB.UseVisualStyleBackColor = true;
+            this.btnModifyDB.Visible = false;
             this.btnModifyDB.Click += new System.EventHandler(this.btnModifyDB_Click);
             // 
             // StudentPaymentListGroupBox
@@ -2587,11 +2595,42 @@
             this.ReportSubjectLisBox.TabIndex = 25;
             this.ReportSubjectLisBox.SelectedIndexChanged += new System.EventHandler(this.ReportSubjectLisBox_SelectedIndexChanged);
             // 
+            // VanEfficiencyCheckBox
+            // 
+            this.VanEfficiencyCheckBox.AutoSize = true;
+            this.VanEfficiencyCheckBox.Location = new System.Drawing.Point(18, 154);
+            this.VanEfficiencyCheckBox.Name = "VanEfficiencyCheckBox";
+            this.VanEfficiencyCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.VanEfficiencyCheckBox.TabIndex = 7;
+            this.VanEfficiencyCheckBox.Text = "Consumo";
+            this.VanEfficiencyCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // btnSortVans
+            // 
+            this.btnSortVans.Location = new System.Drawing.Point(94, 170);
+            this.btnSortVans.Name = "btnSortVans";
+            this.btnSortVans.Size = new System.Drawing.Size(60, 23);
+            this.btnSortVans.TabIndex = 8;
+            this.btnSortVans.Text = "Ordenar";
+            this.btnSortVans.UseVisualStyleBackColor = true;
+            this.btnSortVans.Click += new System.EventHandler(this.btnSortVans_Click);
+            // 
+            // CapacityCheckBox
+            // 
+            this.CapacityCheckBox.AutoSize = true;
+            this.CapacityCheckBox.Location = new System.Drawing.Point(18, 173);
+            this.CapacityCheckBox.Name = "CapacityCheckBox";
+            this.CapacityCheckBox.Size = new System.Drawing.Size(77, 17);
+            this.CapacityCheckBox.TabIndex = 9;
+            this.CapacityCheckBox.Text = "Capacidad";
+            this.CapacityCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 782);
+            this.Controls.Add(this.VanCreateGroupBox);
             this.Controls.Add(this.PaymentCreateGroupBox);
             this.Controls.Add(this.PaymentGroupBox);
             this.Controls.Add(this.SubjectReportGroupBox);
@@ -2614,7 +2653,6 @@
             this.Controls.Add(this.SubjectCreateGroupBox);
             this.Controls.Add(this.ActivityStudentsGroupBox);
             this.Controls.Add(this.StudentListGroupBox);
-            this.Controls.Add(this.VanCreateGroupBox);
             this.Controls.Add(this.VanList);
             this.Controls.Add(this.SubjectListGroupBox);
             this.Controls.Add(this.btnLoadData);
@@ -2758,7 +2796,7 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Button btnCreateNewSubject;
         private System.Windows.Forms.GroupBox VanCreateGroupBox;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox VanEfficiencyTextBox;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label20;
@@ -2914,5 +2952,8 @@
         private System.Windows.Forms.ComboBox FeeYearComboBox;
         private System.Windows.Forms.ListBox FeeStudentListBox;
         private System.Windows.Forms.ListView ExamsListView;
+        private System.Windows.Forms.Button btnSortVans;
+        private System.Windows.Forms.CheckBox VanEfficiencyCheckBox;
+        private System.Windows.Forms.CheckBox CapacityCheckBox;
     }
 }

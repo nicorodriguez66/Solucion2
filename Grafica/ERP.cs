@@ -39,31 +39,6 @@ namespace Solucion2
 
         private void ToDb()
         {
-            foreach (Activity element in mysystem.allactivities)
-            {
-                dbmanager.dbActivities.Add(element);
-            }
-
-            foreach (Exam element in mysystem.allexams)
-            {
-                dbmanager.dbExams.Add(element);
-            }
-            foreach(Student element in mysystem.allstudents)
-            {
-                dbmanager.dbStudents.Add(element);
-            }
-            foreach(Teacher element in mysystem.allteachers)
-            {
-                dbmanager.dbTeachers.Add(element);
-            }
-            foreach(Subject element in mysystem.allsubjects)
-            {
-                dbmanager.dbSubjects.Add(element);
-            }
-            foreach(Van element in mysystem.allvans)
-            {
-                dbmanager.dbVans.Add(element);
-            }
             dbmanager.SaveChanges();
             dbmanager.LoadAllDbs();
             mysystem.allexams = dbmanager.dbExams.ToList();
@@ -370,7 +345,7 @@ namespace Solucion2
             createdStudent.EditStudentSurname(studentSurnameTxtBox.Text); studentSurnameTxtBox.Text = "";
             createdStudent.EditStudentNumber(Int32.Parse(studentNumberTxtBox.Text)); studentNumberTxtBox.Text = "";
             createdStudent.EditStudentidCard(Int32.Parse(studentIdCardTxtBox.Text)); studentIdCardTxtBox.Text = "";
-            mysystem.showallstudents().Add(createdStudent); dbmanager.dbStudents.Add(createdStudent); dbmanager.SaveChanges();
+            mysystem.showallstudents().Add(createdStudent); dbmanager.SaveStudent(createdStudent); dbmanager.SaveChanges();
             hideallgrouboxes();
           }
 
@@ -520,7 +495,7 @@ namespace Solucion2
                 createdSubject.teachers.Add(searchedTeacher); 
             }
 
-            mysystem.showallsubjects().Add(createdSubject); dbmanager.dbSubjects.Add(createdSubject); dbmanager.SaveChanges();
+            mysystem.showallsubjects().Add(createdSubject); dbmanager.SaveSubject(createdSubject);// dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
@@ -601,25 +576,28 @@ namespace Solucion2
 
         private void empty()
         {
-            dbmanager.emptybase("Starter");
-            Student dummy = new Student();
-            dbmanager.SaveStudent(dummy);
-            dbmanager.DeleteStudent(dummy);
+            if(dbmanager.Conected()) 
+                dbmanager.emptybase("Starter");
+            else
+            {
+                MessageBox.Show("La conexión con la base de datos no esta disponible");
+            }
         }
         private void preload()
         {
             dbmanager.preloaded();
             updatedb();
+            refreshdata();
         }
         private void updatedb()
         {
             dbmanager.LoadAllDbs();
-            mysystem.allactivities = dbmanager.dbActivities.ToList();
-            mysystem.allexams = dbmanager.dbExams.ToList();
-            mysystem.allstudents=dbmanager.dbStudents.ToList();
-            mysystem.allsubjects=dbmanager.dbSubjects.ToList();
-            mysystem.allteachers = dbmanager.dbTeachers.ToList();
-            mysystem.allvans = dbmanager.dbVans.ToList();
+            mysystem.allactivities.Clear(); mysystem.allactivities = dbmanager.dbActivities.ToList();
+            mysystem.allexams.Clear(); mysystem.allexams = dbmanager.dbExams.ToList();
+            mysystem.allstudents.Clear(); mysystem.allstudents=dbmanager.dbStudents.ToList();
+            mysystem.allsubjects.Clear(); mysystem.allsubjects=dbmanager.dbSubjects.ToList();
+            mysystem.allteachers.Clear(); mysystem.allteachers = dbmanager.dbTeachers.ToList();
+            mysystem.allvans.Clear(); mysystem.allvans = dbmanager.dbVans.ToList();
         }
 
         private void btnSubjectSearchModify1_Click(object sender, EventArgs e)
@@ -813,7 +791,7 @@ namespace Solucion2
         {
             Van createdVan = new Van();
             createdVan.EditVanCapacity(Int32.Parse(textBox14.Text)); textBox14.Text = "";
-            createdVan.EditVanId(Int32.Parse(textBox13.Text)); textBox13.Text = "";
+            createdVan.EditVanEficiency(Int32.Parse(VanEfficiencyTextBox.Text)); VanEfficiencyTextBox.Text = "";
             createdVan.EditVanName(textBox16.Text); textBox16.Text = "";
             createdVan.EditVanAvailability(VanAvailableCheckBox.Checked);
             mysystem.showallvans().Add(createdVan);dbmanager.dbVans.Add(createdVan); dbmanager.SaveChanges();
@@ -835,9 +813,9 @@ namespace Solucion2
 
         private void btnVanSearchModify_Click(object sender, EventArgs e)
         {
-            if (textBox13.Text != "")
+            if (VanEfficiencyTextBox.Text != "")
             {
-                searchedVan = mysystem.searchVan(Int32.Parse(textBox13.Text));
+                searchedVan = mysystem.searchVan(Int32.Parse(VanEfficiencyTextBox.Text));
                 if (searchedVan == null)
                 {
                     MessageBox.Show("No existe camioneta");
@@ -854,9 +832,9 @@ namespace Solucion2
 
         private void btnVanSearchDelete_Click(object sender, EventArgs e)
         {
-            if (textBox13.Text != "")
+            if (VanEfficiencyTextBox.Text != "")
             {
-                searchedVan = mysystem.searchVan(Int32.Parse(textBox13.Text));
+                searchedVan = mysystem.searchVan(Int32.Parse(VanEfficiencyTextBox.Text));
                 if (searchedVan == null)
                 {
                     MessageBox.Show("No existe camioneta");
@@ -876,7 +854,7 @@ namespace Solucion2
             if (searchedVan != null)
             {
                 searchedVan.EditVanCapacity(Int32.Parse(textBox14.Text)); textBox14.Text = "";
-                searchedVan.EditVanId(Int32.Parse(textBox13.Text)); textBox13.Text = "";
+                searchedVan.EditVanId(Int32.Parse(VanEfficiencyTextBox.Text)); VanEfficiencyTextBox.Text = "";
                 searchedVan.EditVanName(textBox16.Text); textBox16.Text = "";
                 dbmanager.ModifyVan(searchedVan);
                 updatedb();
@@ -1160,7 +1138,7 @@ namespace Solucion2
             Teacher createdTeacher = new Teacher();
             createdTeacher.EditTeacherName(textBox8.Text); textBox8.Text = "";
             createdTeacher.EditTeacherSurname(textBox7.Text); textBox7.Text = "";
-            mysystem.showallteachers().Add(createdTeacher);dbmanager.dbTeachers.Add(createdTeacher); dbmanager.SaveChanges();
+            mysystem.showallteachers().Add(createdTeacher);dbmanager.SaveTeacher(createdTeacher);// dbmanager.SaveChanges();
             hideallgrouboxes();
         }
 
@@ -1178,7 +1156,6 @@ namespace Solucion2
 
             Exam e1 = new Exam {approval = 1, subject = sub1, date = DateTime.Now };
             dbmanager.SaveExam(e1);
-
 
             Van element = new Van();
             dbmanager.SaveVan(element);
@@ -1778,6 +1755,33 @@ namespace Solucion2
                     flag = true;
             }
             return flag;
+        }
+
+        private void btnSortVans_Click(object sender, EventArgs e)
+        {
+            VanAvailableListBox1.Items.Clear();
+            List<Van> origin = mysystem.showAvailableVans();
+            if (VanEfficiencyCheckBox.Checked)
+            {
+                origin=origin.OrderBy(p => p.eficiency).ToList();
+            }
+            else
+            {
+                origin = origin.OrderByDescending(p => p.eficiency).ToList();
+            }
+            if (CapacityCheckBox.Checked)
+            {
+                origin = origin.OrderByDescending(p => p.capacity).ToList();
+            }
+            else
+            {
+                origin = origin.OrderBy(p => p.capacity).ToList();
+            }
+            foreach (Van element in origin)
+            {
+                VanAvailableListBox1.Items.Add(element.ToString());
+            }
+
         }
     }
 }

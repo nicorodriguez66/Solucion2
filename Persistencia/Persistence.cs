@@ -26,9 +26,13 @@ namespace Persistencia
 
         public Persistence()
         {
-            this.Database.CreateIfNotExists();
+            //emptybase("");
             this.Database.Connection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Starter ;Integrated Security=True";
             conexionstr = this.Database.Connection.ConnectionString;
+            this.Database.CreateIfNotExists();
+            if (!Conected())
+                MessageBox.Show("La conexión con la base de datos no esta disponible");
+            
         }
         
         public void emptybase(string dbname)
@@ -96,13 +100,46 @@ namespace Persistencia
 
         public void LoadAllDbs()
         {
+            clearDbSets();
+            dbVans.Load();
             dbExams.Load();
             dbFees.Load();
             dbStudents.Load();
             dbSubjects.Load();
-            dbTeachers.Load();
-            dbVans.Load();
+            dbTeachers.Load();    
         }
+
+        public void clearDbSets()
+        {
+            
+            foreach (Activity element in dbActivities)
+            {
+                dbActivities.Remove(element);
+            }
+            foreach (Exam element in dbExams)
+            {
+                dbExams.Remove(element);
+            }
+            foreach(Student element in dbStudents)
+            {
+                dbStudents.Remove(element);
+            }
+            foreach(Teacher element in dbTeachers)
+            {
+                dbTeachers.Remove(element);
+            }
+            foreach(Subject element in dbSubjects)
+            {
+                dbSubjects.Remove(element);
+            }
+            foreach(Van element in dbVans)
+            {
+                dbVans.Remove(element);
+            }
+        }
+
+
+
 
         public bool Conected()
         {
