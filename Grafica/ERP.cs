@@ -585,6 +585,7 @@ namespace Solucion2
         }
         private void preload()
         {
+            dbmanager = new Persistence();
             dbmanager.preloaded();
             updatedb();
             refreshdata();

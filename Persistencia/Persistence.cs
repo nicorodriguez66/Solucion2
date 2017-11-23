@@ -106,7 +106,8 @@ namespace Persistencia
             dbFees.Load();
             dbStudents.Load();
             dbSubjects.Load();
-            dbTeachers.Load();    
+            dbTeachers.Load();
+            //SaveChanges();    
         }
 
         public void clearDbSets()
@@ -135,7 +136,7 @@ namespace Persistencia
             foreach(Van element in dbVans)
             {
                 dbVans.Remove(element);
-            }
+            }            
         }
 
 
