@@ -1,2 +1,4 @@
-en el packet manager correr:
-UPDATE-DATABASE
+1) Levantar servicios SQL
+2) En el packet manager correr el comando:
+	UPDATE-DATABASE
+3) En el Management Studio levantar el archivo xxx.sql
